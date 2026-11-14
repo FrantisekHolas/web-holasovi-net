@@ -34,7 +34,7 @@ Malba stromu se mění podle ročního období a svátků, podobně jako sváte�
 
 | Motiv | Kdy | Malba |
 |---|---|---|
-| jaro, léto, podzim, zima | astronomicky, od okamžiku rovnodennosti nebo slunovratu (kolem 20. 3., 21. 6., 23. 9. a 21. 12.) | jaro a podzim |
+| jaro, léto, podzim, zima | astronomicky, od okamžiku rovnodennosti nebo slunovratu (kolem 20. 3., 21. 6., 23. 9. a 21. 12.) | jaro, léto a podzim |
 | Vánoce | 24.–26. 12. | zatím není |
 | Silvestr a Nový rok | 31. 12.–1. 1., s ohňostrojem | zatím není |
 | Velikonoce | Zelený čtvrtek – Velikonoční pondělí | zatím není |

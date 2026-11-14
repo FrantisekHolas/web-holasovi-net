@@ -35,7 +35,7 @@ window.HOLASOVI.motivy = {
 
   obdobi: {
     jaro:   { nazev: 'Jaro',   obrazky: ['ctverec', 'vyska', 'panorama'] },
-    leto:   { nazev: 'Léto',   obrazky: [] },
+    leto:   { nazev: 'Léto',   obrazky: ['ctverec', 'vyska', 'panorama'] },
     podzim: { nazev: 'Podzim', obrazky: ['ctverec', 'vyska', 'panorama'] },
     zima:   { nazev: 'Zima',   obrazky: [] }
   },

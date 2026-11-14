@@ -91,6 +91,32 @@ def zmer_posuny(predloha, malba, format, polohy):
     return vysledek, FORMATY[format][2] * sirka
 
 
+def srovnani(posuny, polohy, format, rozmer):
+    """Matice, která lístky malby přesune na polohy předlohy (posun, případně i mírné měřítko).
+    Vrací None, když malba sedí."""
+    P = np.array([(p[format][0] / 100 * rozmer[0], p[format][1] / 100 * rozmer[1]) for p in polohy.values()])
+    Q = P + np.array([(v[0], v[1]) for v in posuny.values()])
+    t = (P - Q).mean(axis=0)
+    zbytek_posun = np.sqrt(((Q + t - P) ** 2).sum(axis=1).mean())
+    m = np.float32([[1, 0, t[0]], [0, 1, t[1]]])
+    popis = f'posun {t[0]:+.1f} px vodorovně a {t[1]:+.1f} px svisle'
+    if zbytek_posun > 1:
+        # zvlášť pro každou osu: P = s * Q + t
+        s, tt = [], []
+        for osa in (0, 1):
+            (so, to), *_ = np.linalg.lstsq(np.c_[Q[:, osa], np.ones(len(Q))], P[:, osa], rcond=None)
+            s.append(so)
+            tt.append(to)
+        zbytek_meritko = np.sqrt(((Q * s + tt - P) ** 2).sum(axis=1).mean())
+        if all(0.95 <= so <= 1.05 for so in s) and zbytek_meritko < 0.7 * zbytek_posun:
+            m = np.float32([[s[0], 0, tt[0]], [0, s[1], tt[1]]])
+            popis = f'měřítko {s[0]:.3f} × {s[1]:.3f}, posun {tt[0]:+.1f} a {tt[1]:+.1f} px'
+    if abs(m[0, 2]) < 0.5 and abs(m[1, 2]) < 0.5 and abs(m[0, 0] - 1) < 0.001 and abs(m[1, 1] - 1) < 0.001:
+        return None
+    print('  srovnání malby: ' + popis)
+    return m
+
+
 def kontrolni_obrazek(predloha, malba, format, polohy, cesta):
     sirka, vyska = predloha.size
     r = FORMATY[format][2] * sirka * 0.62
@@ -136,11 +162,8 @@ def main():
         malba = nacti(getattr(arg, format), rozmer)
 
         posuny, listek = zmer_posuny(predloha, malba, format, polohy)
-        dx = float(np.mean([v[0] for v in posuny.values()]))
-        dy = float(np.mean([v[1] for v in posuny.values()]))
-        if abs(dx) >= 0.5 or abs(dy) >= 0.5:
-            print(f'  srovnání malby o {-dx:+.1f} px vodorovně a {-dy:+.1f} px svisle')
-            m = np.float32([[1, 0, -dx], [0, 1, -dy]])
+        m = srovnani(posuny, polohy, format, rozmer)
+        if m is not None:
             malba = Image.fromarray(cv2.warpAffine(np.asarray(malba), m, rozmer, flags=cv2.INTER_LANCZOS4,
                                                    borderMode=cv2.BORDER_REPLICATE))
             posuny, listek = zmer_posuny(predloha, malba, format, polohy)
