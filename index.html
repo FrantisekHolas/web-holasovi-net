@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Holasovi</title>
+  <meta name="description" content="Rodinný strom Holasových – rozcestník k webům členů rodiny.">
+  <meta name="theme-color" content="#1c1712">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Holasovi">
+  <meta property="og:description" content="Rodinný strom Holasových">
+  <meta property="og:url" content="https://holasovi.net/">
+  <meta property="og:image" content="https://holasovi.net/assets/img/nahled.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <link rel="preload" href="assets/fonts/cinzel-decorative-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="assets/css/styl.css">
+</head>
+<body>
+  <h1 class="jen-pro-ctecky">Holasovi – rodinný strom</h1>
+
+  <main class="scena">
+    <div class="scena__pozadi" aria-hidden="true"></div>
+    <div class="platno" id="platno">
+      <picture>
+        <source media="(max-aspect-ratio: 3/4)" type="image/webp"
+                srcset="assets/img/strom-na-vysku-720.webp 720w, assets/img/strom-na-vysku.webp 1116w"
+                sizes="100vw">
+        <source media="(min-aspect-ratio: 21/10)" type="image/webp"
+                srcset="assets/img/strom-panorama-1200.webp 1200w, assets/img/strom-panorama.webp 2000w"
+                sizes="100vw">
+        <img src="assets/img/strom-ctverec.webp"
+             srcset="assets/img/strom-ctverec-900.webp 900w, assets/img/strom-ctverec.webp 1500w"
+             sizes="(min-aspect-ratio: 1/1) 100vh, 100vw"
+             width="1500" height="1500" fetchpriority="high" decoding="async"
+             alt="Rodinný strom Holasových: malovaný strom s korunou v pěti barvách. V každé barvě je jeden velký lístek s iniciálou člena rodiny – František, Věrka, Lukáš, Radim a Kristýna.">
+      </picture>
+      <!-- Lístky s iniciálami doplní skript podle souboru assets/js/clenove.js -->
+    </div>
+  </main>
+
+  <noscript>
+    <p class="bez-skriptu"><a href="https://frantisek.holasovi.net">František</a></p>
+  </noscript>
+
+  <dialog class="karta" id="karta" aria-labelledby="karta-jmeno">
+    <div class="karta__obsah">
+      <button class="karta__zavrit" type="button" aria-label="Zavřít">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+      <div class="karta__hlava">
+        <div class="karta__listek" id="karta-listek" aria-hidden="true"></div>
+        <h2 id="karta-jmeno"></h2>
+      </div>
+      <ul class="karta__odkazy" id="karta-odkazy"></ul>
+    </div>
+  </dialog>
+
+  <svg width="0" height="0" aria-hidden="true" style="position: absolute">
+    <defs>
+      <linearGradient id="zlate-pismo" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#fffaf0"/>
+        <stop offset="0.45" stop-color="#ffe7a6"/>
+        <stop offset="1" stop-color="#e2ad48"/>
+      </linearGradient>
+      <filter id="relief" x="-30%" y="-30%" width="160%" height="160%">
+        <feGaussianBlur in="SourceAlpha" stdDeviation="1" result="rozmazani"/>
+        <feSpecularLighting in="rozmazani" surfaceScale="2.5" specularConstant="1" specularExponent="16" lighting-color="#fffbe8" result="lesk">
+          <feDistantLight azimuth="225" elevation="40"/>
+        </feSpecularLighting>
+        <feComposite in="lesk" in2="SourceAlpha" operator="in" result="leskUvnitr"/>
+        <feComposite in="SourceGraphic" in2="leskUvnitr" operator="arithmetic" k1="0" k2="1" k3="0.9" k4="0" result="nasviceni"/>
+        <feDropShadow in="nasviceni" dx="0.6" dy="1.6" stdDeviation="1.4" flood-color="#140800" flood-opacity="0.8"/>
+      </filter>
+    </defs>
+  </svg>
+
+  <script src="assets/js/clenove.js"></script>
+  <script src="assets/js/strom.js"></script>
+</body>
+</html>
