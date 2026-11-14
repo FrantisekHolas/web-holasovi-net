@@ -28,6 +28,16 @@ odkazy: [
 
 E-mail je rozdělený na dvě části, aby ho roboti sbírající adresy hůř našli.
 
+## Podnikatelský profil Františka
+
+Na kartě Františka je odkaz **Podnikatelský profil** na stránku https://holasovi.net/frantisek-profil-88722520/ (anglicky `en/`, německy `de/`). Obsahuje údaje podle vzoru conceptual.cz: IČO, DIČ, plátcovství DPH, právní formu, místo a předmět podnikání, správce daně, bankovní účty zveřejněné v registru plátců DPH a kontakt, s odkazy do živnostenského rejstříku (RŽP), registru plátců DPH (ADIS) a systému VIES.
+
+- Stránka nemá logo a je černobílá. Světlý nebo tmavý režim se řídí prohlížečem, přepínač v záhlaví volbu změní a zapamatuje.
+- Česká stránka pošle návštěvníka s anglickým nebo německým prohlížečem na jeho jazyk. Ruční volba jazyka se zapamatuje.
+- IČO, DIČ, čísla účtů a IBAN jdou zkopírovat tlačítkem.
+- Stránky se generují nástrojem [`nastroje/profil-frantisek.py`](nastroje/profil-frantisek.py) z údajů a překladů v něm; po změně stačí upravit tento soubor a spustit `python3 nastroje/profil-frantisek.py`. Vzhled a skript jsou ve `frantisek-profil-88722520/assets/`.
+- Údaje jsou z ARES, živnostenského rejstříku a registru plátců DPH ke 14. 11. 2026.
+
 ## Motivy podle období
 
 Malba stromu se mění podle ročního období a svátků, podobně jako sváteční logo Googlu. Lístky, jména i karty zůstávají na stejném místě, mění se jen obraz.
@@ -86,7 +96,9 @@ assets/js/strom.js      lístky a karta s kontaktem
 assets/img/motivy/      malby stromu a pozadí pro jednotlivé motivy
 assets/img/nahled.jpg   náhled pro sdílení odkazu
 assets/fonts/           písma Cinzel, Cinzel Decorative a EB Garamond
+frantisek-profil-88722520/  podnikatelský profil Františka (cs, en/, de/)
 nastroje/priprav-motiv.py  příprava maleb nového motivu (není součástí webu)
+nastroje/profil-frantisek.py  generátor podnikatelského profilu (není součástí webu)
 ```
 
 ## Zveřejnění na GitHub Pages
@@ -121,4 +133,4 @@ Stávající záznamy pro `frantisek.holasovi.net` a pro e-mail (MX) nechte beze
 ## Původ obsahu
 
 - Malby stromu byly vytvořeny v Google Gemini podle zadání rodiny.
-- Písma Cinzel, Cinzel Decorative a EB Garamond jsou šířena pod licencí [SIL Open Font License 1.1](https://openfontlicense.org).
+- Písma Cinzel, Cinzel Decorative, EB Garamond a Inter (podnikatelský profil) jsou šířena pod licencí [SIL Open Font License 1.1](https://openfontlicense.org).

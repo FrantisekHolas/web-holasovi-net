@@ -13,9 +13,11 @@
   var IKONY = {
     email: '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 7l8.5 6 8.5-6"/>',
     telefon: '<path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/>',
-    web: '<circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.6 2.8 3.9 5.8 3.9 9s-1.3 6.2-3.9 9c-2.6-2.8-3.9-5.8-3.9-9s1.3-6.2 3.9-9z"/>'
+    web: '<circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.6 2.8 3.9 5.8 3.9 9s-1.3 6.2-3.9 9c-2.6-2.8-3.9-5.8-3.9-9s1.3-6.2 3.9-9z"/>',
+    firma: '<rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/><path d="M3 13h18"/>'
   };
   var SIPKA = '<svg class="odkaz__sipka" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7"/><path d="M8 7h9v9"/></svg>';
+  var DALE = '<svg class="odkaz__sipka" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>';
 
   if (!platno) return;
 
@@ -56,7 +58,10 @@
       }
     });
     (clen.odkazy || []).forEach(function (o) {
-      if (o.url) polozky.push({ ikona: 'web', popis: o.popis || 'Webová stránka', text: o.text || o.url, url: o.url, venku: true });
+      if (!o.url) return;
+      // odkaz na jiný web (s protokolem) do nové záložky, odkaz v rámci holasovi.net ve stejné
+      var venku = /^[a-z][a-z0-9+.-]*:/i.test(o.url);
+      polozky.push({ ikona: IKONY[o.ikona] ? o.ikona : 'web', popis: o.popis || 'Webová stránka', text: o.text || o.url, url: o.url, venku: venku, interni: !venku });
     });
     return polozky;
   }
@@ -89,7 +94,7 @@
       a.innerHTML =
         '<svg class="odkaz__ikona" viewBox="0 0 24 24" aria-hidden="true">' + IKONY[p.ikona] + '</svg>' +
         '<span class="odkaz__texty"><span class="odkaz__popis"></span><span class="odkaz__adresa"></span></span>' +
-        (p.venku ? SIPKA : '');
+        (p.venku ? SIPKA : p.interni ? DALE : '');
       a.querySelector('.odkaz__popis').textContent = p.popis;
       a.querySelector('.odkaz__adresa').textContent = p.text;
       li.appendChild(a);

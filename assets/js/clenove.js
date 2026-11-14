@@ -11,6 +11,8 @@
 
   Odkazy (pole "odkazy"), např. až bude mít člen vlastní web:
     { popis: 'Webová stránka', text: 'lukas.holasovi.net', url: 'https://lukas.holasovi.net' }
+  Odkaz na jiný web se otevře v nové záložce, odkaz v rámci holasovi.net (adresa bez https://)
+  ve stejné. Volitelně lze změnit ikonu: ikona: 'web' (výchozí) nebo 'firma'.
 
   Polohy lístků jsou v procentech obrazu [vodorovně, svisle] pro tři verze malby
   (assets/img/motivy/<motiv>/..., platí pro všechny motivy, viz assets/js/motivy.js):
@@ -33,7 +35,8 @@ window.HOLASOVI = {
         { typ: 'telefon', cislo: '+420 776 280 026' }
       ],
       odkazy: [
-        { popis: 'Webová stránka', text: 'frantisek.holasovi.net', url: 'https://frantisek.holasovi.net' }
+        { popis: 'Webová stránka', text: 'frantisek.holasovi.net', url: 'https://frantisek.holasovi.net' },
+        { popis: 'Podnikatelský profil', text: 'IČO 88722520', url: 'frantisek-profil-88722520/', ikona: 'firma' }
       ]
     },
     {
