@@ -29,6 +29,7 @@ PSC = '613 00'
 MESTO = 'Brno'
 EMAIL = 'frantisek@holasovi.net'
 TELEFON = '+420 776 280 026'
+DATOVKA = 'ymkb6j4'
 ZDROJ_DATUM = '2026-11-14'
 UCTY = [
     # číslo účtu, IBAN, banka, BIC, zveřejněno v registru plátců DPH
@@ -38,6 +39,7 @@ UCTY = [
 ODKAZ_RZP = 'https://rzp.gov.cz/verejne-udaje/cs/udaje/vyber-subjektu;ico=' + ICO
 ODKAZ_ADIS = 'https://adisspr.mfcr.cz/dpr/DphReg?id=1&pocet=1&fu=&OK=+Search+&ZPRAC=RDPHI1&dic=' + DIC[2:]
 ODKAZ_VIES = 'https://ec.europa.eu/taxation_customs/vies/#/vat-validation'
+ODKAZ_DATOVKA = 'https://www.datovka.gov.cz/sds/detail?dbid=' + DATOVKA
 ODKAZ_MAPY = 'https://www.google.com/maps/search/?api=1&query=Slez%C3%A1kova%20999%2F25%2C%20613%2000%20Brno'
 
 # ---------- Texty ----------
@@ -84,6 +86,7 @@ T = {
         'kopirovat': 'Kopírovat', 'zkopirovano': 'Zkopírováno', 'kop_ico': 'Kopírovat IČO', 'kop_dic': 'Kopírovat DIČ',
         'kop_cislo': 'Kopírovat číslo účtu', 'kop_iban': 'Kopírovat IBAN',
         'h_kontakt': 'Kontakt', 'role': 'podnikatel', 'email': 'E-mail', 'telefon': 'Telefon',
+        'datovka': 'Datová schránka', 'datovka_over': 'Ověřit v registru datových schránek', 'kop_datovka': 'Kopírovat ID datové schránky',
         'rodina': 'Rodinný strom Holasových',
     },
     'en': {
@@ -122,6 +125,7 @@ T = {
         'kopirovat': 'Copy', 'zkopirovano': 'Copied', 'kop_ico': 'Copy Business ID', 'kop_dic': 'Copy VAT ID',
         'kop_cislo': 'Copy account number', 'kop_iban': 'Copy IBAN',
         'h_kontakt': 'Contact', 'role': 'Sole trader', 'email': 'Email', 'telefon': 'Phone',
+        'datovka': 'Data box (ISDS)', 'datovka_over': 'Verify in the Czech data box registry', 'kop_datovka': 'Copy data box ID',
         'rodina': 'Holas family tree',
     },
     'de': {
@@ -160,6 +164,7 @@ T = {
         'kopirovat': 'Kopieren', 'zkopirovano': 'Kopiert', 'kop_ico': 'Ident.-Nr. kopieren', 'kop_dic': 'USt-IdNr. kopieren',
         'kop_cislo': 'Kontonummer kopieren', 'kop_iban': 'IBAN kopieren',
         'h_kontakt': 'Kontakt', 'role': 'Einzelunternehmer', 'email': 'E-Mail', 'telefon': 'Telefon',
+        'datovka': 'Datenbox (ISDS)', 'datovka_over': 'Im tschechischen Datenbox-Verzeichnis prüfen', 'kop_datovka': 'Datenbox-ID kopieren',
         'rodina': 'Stammbaum der Familie Holas',
     },
 }
@@ -175,6 +180,7 @@ def svg(obsah, trida=''):
 EXT = svg('<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>')
 MAIL = svg('<rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="3 7 12 13 21 7"/>')
 TELEFON_IKONA = svg('<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>')
+SCHRANKA = svg('<polyline points="22 12 16 12 14 15 10 15 8 12 2 12"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/>')
 KOPIE = svg('<rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>')
 MESIC = svg('<path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>', 'ikona-mesic')
 SLUNCE = svg('<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>', 'ikona-slunce')
@@ -423,6 +429,14 @@ def stranka(jazyk):
               <div>
                 <span class="label">{t["telefon"]}</span>
                 <a class="value" href="tel:{TELEFON.replace(" ", "")}">{TELEFON.replace(" ", "&nbsp;")}</a>
+              </div>
+            </li>
+            <li class="channel">
+              <span class="icon" aria-hidden="true">{SCHRANKA}</span>
+              <div>
+                <span class="label">{t["datovka"]}</span>
+                <span class="num-row"><span class="value id">{DATOVKA}</span>{kopirovat(t, DATOVKA, t["kop_datovka"])}</span>
+                {odkaz_ven(ODKAZ_DATOVKA, t["datovka_over"], trida="hint ext")}
               </div>
             </li>
           </ul>

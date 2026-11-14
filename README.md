@@ -30,7 +30,7 @@ E-mail je rozdělený na dvě části, aby ho roboti sbírající adresy hůř n
 
 ## Podnikatelský profil Františka
 
-Na kartě Františka je odkaz **Podnikatelský profil** na stránku https://holasovi.net/frantisek-profil-88722520/ (anglicky `en/`, německy `de/`). Obsahuje údaje podle vzoru conceptual.cz: IČO, DIČ, plátcovství DPH, právní formu, místo a předmět podnikání, správce daně, bankovní účty zveřejněné v registru plátců DPH a kontakt, s odkazy do živnostenského rejstříku (RŽP), registru plátců DPH (ADIS) a systému VIES.
+Na kartě Františka je odkaz **Podnikatelský profil** na stránku https://holasovi.net/frantisek-profil-88722520/ (anglicky `en/`, německy `de/`). Obsahuje údaje podle vzoru conceptual.cz: IČO, DIČ, plátcovství DPH, právní formu, místo a předmět podnikání, správce daně, bankovní účty zveřejněné v registru plátců DPH a kontakt včetně datové schránky, s odkazy do živnostenského rejstříku (RŽP), registru plátců DPH (ADIS), systému VIES a registru datových schránek.
 
 - Stránka nemá logo a je černobílá. Světlý nebo tmavý režim se řídí prohlížečem, přepínač v záhlaví volbu změní a zapamatuje.
 - Česká stránka pošle návštěvníka s anglickým nebo německým prohlížečem na jeho jazyk. Ruční volba jazyka se zapamatuje.

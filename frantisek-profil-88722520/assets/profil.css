@@ -243,6 +243,9 @@ h2::before { content: ""; width: 6px; height: 1.1em; border-radius: 3px; backgro
 .channel .icon svg { width: 22px; height: 22px; }
 .channel .label { display: block; color: var(--muted); font-size: .9rem; line-height: 1.3; }
 .channel .value { font-weight: 600; font-size: 1.1rem; overflow-wrap: anywhere; }
+.channel .value.id { letter-spacing: .06em; }
+.channel .hint { display: inline-block; font-size: .9rem; margin-top: .15rem; }
+.channel .hint svg { width: 14px; height: 14px; vertical-align: -.1em; margin-left: .25rem; }
 .nowrap { white-space: nowrap; }
 
 /* ---------- Zápatí ---------- */
