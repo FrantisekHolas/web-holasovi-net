@@ -41,7 +41,6 @@ Polohy lístků pro každou verzi jsou v `assets/js/clenove.js` v procentech obr
 ```
 index.html              stránka
 404.html                stránka „Tady nic neroste“
-CNAME                   vlastní doména pro GitHub Pages
 assets/css/styl.css     vzhled
 assets/js/clenove.js    členové rodiny a jejich odkazy
 assets/js/strom.js      lístky a karta s odkazy
@@ -53,8 +52,9 @@ assets/fonts/           písma Cinzel, Cinzel Decorative a EB Garamond
 
 1. V repozitáři otevřete **Settings → Pages**.
 2. V části **Build and deployment** zvolte **Source: Deploy from a branch**, vyberte větev s webem a složku **/ (root)**.
-3. Do **Custom domain** zadejte `holasovi.net` (soubor `CNAME` už to obsahuje).
-4. Jakmile GitHub ověří DNS, zapněte **Enforce HTTPS**.
+3. Web je hned k vyzkoušení na https://frantisekholas.github.io/web-holasovi-net/
+4. Až bude nastavené DNS (níže), zadejte do **Custom domain** `holasovi.net` a uložte. GitHub tím do větve přidá soubor `CNAME`.
+5. Jakmile GitHub ověří DNS, zapněte **Enforce HTTPS**.
 
 GitHub Pages zdarma vyžaduje veřejný repozitář.
 
