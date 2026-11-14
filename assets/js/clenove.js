@@ -12,11 +12,12 @@
   Odkazy (pole "odkazy"), např. až bude mít člen vlastní web:
     { popis: 'Webová stránka', text: 'lukas.holasovi.net', url: 'https://lukas.holasovi.net' }
 
-  Polohy lístků jsou v procentech obrazu [vodorovně, svisle] pro tři verze malby:
-    ctverec  = assets/img/strom-ctverec.webp  (notebooky, běžné monitory, tablety na šířku)
-    vyska    = assets/img/strom-na-vysku.webp (mobily a tablety na výšku)
-    panorama = assets/img/strom-panorama.webp (ultraširoké monitory a mobily na šířku)
-  Polohy měňte jen tehdy, když se vymění obraz.
+  Polohy lístků jsou v procentech obrazu [vodorovně, svisle] pro tři verze malby
+  (assets/img/motivy/<motiv>/..., platí pro všechny motivy, viz assets/js/motivy.js):
+    ctverec  = ctverec.webp  (notebooky, běžné monitory, tablety na šířku)
+    vyska    = vyska.webp    (mobily a tablety na výšku)
+    panorama = panorama.webp (ultraširoké monitory a mobily na šířku)
+  Polohy měňte jen tehdy, když se vymění celá malba.
 */
 window.HOLASOVI = {
   clenove: [

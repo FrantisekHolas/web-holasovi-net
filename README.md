@@ -28,6 +28,32 @@ odkazy: [
 
 E-mail je rozdělený na dvě části, aby ho roboti sbírající adresy hůř našli.
 
+## Motivy podle období
+
+Malba stromu se mění podle ročního období a svátků, podobně jako sváteční logo Googlu. Lístky, jména i karty zůstávají na stejném místě, mění se jen obraz.
+
+| Motiv | Kdy | Malba |
+|---|---|---|
+| jaro, léto, podzim, zima | astronomicky, od okamžiku rovnodennosti nebo slunovratu (kolem 20. 3., 21. 6., 23. 9. a 21. 12.) | zatím jen podzim |
+| Vánoce | 24.–26. 12. | zatím není |
+| Silvestr a Nový rok | 31. 12.–1. 1., s ohňostrojem | zatím není |
+| Velikonoce | Zelený čtvrtek – Velikonoční pondělí | zatím není |
+
+Svátky mají přednost před ročním obdobím. Rozhoduje datum a čas v Česku. Dokud motiv nemá vlastní malbu, použije se malba ročního období a nakonec podzim.
+
+Seznam motivů a jejich termíny jsou v [`assets/js/motivy.js`](assets/js/motivy.js). Nová malba se přidá takto:
+
+1. V Gemini se upraví stávající podzimní malba (čtverec, na výšku i panorama zvlášť), aby kompozice, kmen a pět velkých lístků zůstaly na místě.
+2. Malby se zarovnají na podzimní předlohu a uloží do `assets/img/motivy/<motiv>/` ve stejných rozměrech: `ctverec.webp` (1500 × 1500), `ctverec-900.webp`, `pozadi.webp` (48 px, rozmazané pozadí), `vyska.webp` (1116 × 2000), `vyska-720.webp`, `panorama.webp` (2000 × 557), `panorama-1200.webp`.
+3. V `motivy.js` se u motivu doplní dodané verze, např. `obrazky: ['ctverec', 'vyska', 'panorama']`.
+
+Vyzkoušet motiv předem jde přes adresu:
+
+- `https://holasovi.net/?motiv=zima` ukáže zvolený motiv,
+- `https://holasovi.net/?datum=2026-12-31T23:59:50` spustí stránku jako v daném okamžiku (český čas), včetně půlnočního ohňostroje.
+
+**Ohňostroj** (`assets/js/ohnostroj.js`): rakety v barvách lístků startují samy a klepnutí na oblohu mimo lístky vypustí další. O půlnoci na Nový rok přijde dvanáctivteřinové finále. Dokud Silvestr nemá vlastní noční malbu, krajina se setmí a lístky svítí jako lucerny. Při zapnutém omezení pohybu v systému startují rakety jen po klepnutí.
+
 ## Jak web funguje
 
 Statický web bez sestavování: HTML, CSS a malý skript. Nepoužívá cookies, měření návštěvnosti ani externí služby, písma jsou uložená přímo na webu.
@@ -36,19 +62,23 @@ Podle tvaru obrazovky se zobrazí jedna ze tří verzí malby:
 
 | Obrazovka | Malba |
 |---|---|
-| mobil nebo tablet na výšku | `assets/img/strom-na-vysku.webp` |
-| notebook, běžný monitor, tablet na šířku | `assets/img/strom-ctverec.webp`, okolí vyplní rozmazané pozadí |
-| ultraširoký monitor (21:9, 32:9), mobil na šířku | `assets/img/strom-panorama.webp` |
+| mobil nebo tablet na výšku | `assets/img/motivy/<motiv>/vyska.webp` |
+| notebook, běžný monitor, tablet na šířku | `assets/img/motivy/<motiv>/ctverec.webp`, okolí vyplní rozmazané pozadí |
+| ultraširoký monitor (21:9, 32:9), mobil na šířku | `assets/img/motivy/<motiv>/panorama.webp` |
 
-Polohy lístků pro každou verzi jsou v `assets/js/clenove.js` v procentech obrazu. Při výměně malby je potřeba je přeměřit.
+Polohy lístků pro každou verzi jsou v `assets/js/clenove.js` v procentech obrazu a platí pro všechny motivy. Při výměně celé malby je potřeba je přeměřit.
 
 ```
 index.html              stránka
 404.html                stránka „Tady nic neroste“
 assets/css/styl.css     vzhled
 assets/js/clenove.js    členové rodiny, kontakty a odkazy
+assets/js/motivy.js     motivy podle ročního období a svátků
+assets/js/obdobi.js     výběr motivu podle data (rovnodennosti, Velikonoce)
+assets/js/ohnostroj.js  ohňostroj pro Silvestr a Nový rok
 assets/js/strom.js      lístky a karta s kontaktem
-assets/img/             malby stromu, pozadí a náhled pro sdílení
+assets/img/motivy/      malby stromu a pozadí pro jednotlivé motivy
+assets/img/nahled.jpg   náhled pro sdílení odkazu
 assets/fonts/           písma Cinzel, Cinzel Decorative a EB Garamond
 ```
 

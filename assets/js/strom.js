@@ -69,6 +69,7 @@
     var meritko = 72 / 120;
     var x = clen.poloha.ctverec[0] / 100 * 900;
     var y = clen.poloha.ctverec[1] / 100 * 900;
+    if (data.motiv && data.motiv.ctverecMaly) kartaListek.style.backgroundImage = 'url("' + data.motiv.ctverecMaly + '")';
     kartaListek.style.backgroundSize = (900 * meritko) + 'px';
     kartaListek.style.backgroundPosition = (-(x - 60) * meritko) + 'px ' + (-(y - 60) * meritko) + 'px';
     kartaListek.replaceChildren(inicialaSvg(clen.inicial, 0));
