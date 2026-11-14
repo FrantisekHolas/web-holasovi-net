@@ -316,6 +316,7 @@ button.listek:focus-visible .listek__jmeno { opacity: 1; }
   flex-direction: column;
   gap: 10px;
 }
+.karta__odkazy[hidden] { display: none; }
 .odkaz {
   display: flex;
   align-items: center;

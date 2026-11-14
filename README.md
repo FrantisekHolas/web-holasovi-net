@@ -10,19 +10,23 @@ Rodinný rozcestník Holasových. Stránku tvoří jen malovaný strom: jeho kor
 | žlutý | Radim |
 | oranžový | Kristýna |
 
-Lístek, ke kterému patří odkaz, je klikací a otevře kartu s odkazy. Lístek bez odkazu je jen ozdobou.
+Po kliknutí na lístek se otevře karta se jménem, kontaktem a odkazy daného člena. Na kartě se ukáže jen to, co je vyplněné, takže například položka „Webová stránka“ se objeví až ve chvíli, kdy ji člen bude mít.
 
-## Jak přidat odkaz
+## Jak doplnit kontakt nebo odkaz
 
-Všechno je v jediném souboru [`assets/js/clenove.js`](assets/js/clenove.js). U daného člena doplňte do pole `odkazy` položku, například:
+Všechno je v jediném souboru [`assets/js/clenove.js`](assets/js/clenove.js). U daného člena doplňte:
 
 ```js
+kontakty: [
+  { typ: 'email', uzivatel: 'lukas', domena: 'holasovi.net' },
+  { typ: 'telefon', cislo: '+420 123 456 789' }
+],
 odkazy: [
   { popis: 'Webová stránka', text: 'lukas.holasovi.net', url: 'https://lukas.holasovi.net' }
 ]
 ```
 
-Jakmile má člen aspoň jeden odkaz, jeho lístek začne fungovat.
+E-mail je rozdělený na dvě části, aby ho roboti sbírající adresy hůř našli.
 
 ## Jak web funguje
 
@@ -42,8 +46,8 @@ Polohy lístků pro každou verzi jsou v `assets/js/clenove.js` v procentech obr
 index.html              stránka
 404.html                stránka „Tady nic neroste“
 assets/css/styl.css     vzhled
-assets/js/clenove.js    členové rodiny a jejich odkazy
-assets/js/strom.js      lístky a karta s odkazy
+assets/js/clenove.js    členové rodiny, kontakty a odkazy
+assets/js/strom.js      lístky a karta s kontaktem
 assets/img/             malby stromu, pozadí a náhled pro sdílení
 assets/fonts/           písma Cinzel, Cinzel Decorative a EB Garamond
 ```
