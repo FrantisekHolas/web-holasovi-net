@@ -274,11 +274,20 @@
   // Přepočítává se každou minutu, takže otevřená stránka se večer pomalu stmívá.
   var vynucenaNoc = parseFloat(parametry.noc);
   var minulaNoc = null;
+  // tvar obrazovky podle stejných podmínek jako <source media> v index.html
+  var DOTAZY = { vyska: '(max-aspect-ratio: 3/4)', panorama: '(min-aspect-ratio: 21/10)' };
+  function zobrazenyFormat() {
+    if (!window.matchMedia) return 'ctverec';
+    if (window.matchMedia(DOTAZY.vyska).matches) return 'vyska';
+    if (window.matchMedia(DOTAZY.panorama).matches) return 'panorama';
+    return 'ctverec';
+  }
   function nastavNoc() {
     var noc;
     if (!isNaN(vynucenaNoc)) noc = Math.min(1, Math.max(0, vynucenaNoc));
     else if (motiv.noc === 'vzdy') noc = 1;
-    else if (motiv.noc === 'malba') noc = 0;
+    // noční malba se neztmavuje; záložní malba jiného motivu (chybí-li daný tvar) se řídí sluncem
+    else if (motiv.noc === 'malba' && motiv.zdroje[zobrazenyFormat()] === motiv.id) noc = 0;
     else {
       try { noc = miraNoci(H.ted()); } catch (e) { noc = 0; }
     }
@@ -300,6 +309,13 @@
   }
   nastavNoc();
   setInterval(nastavNoc, 60000);
+  if (motiv.noc === 'malba' && window.matchMedia) {
+    Object.keys(DOTAZY).forEach(function (f) {
+      var mq = window.matchMedia(DOTAZY[f]);
+      if (mq.addEventListener) mq.addEventListener('change', nastavNoc);
+      else if (mq.addListener) mq.addListener(nastavNoc);
+    });
+  }
   document.addEventListener('visibilitychange', function () { if (!document.hidden) nastavNoc(); });
 
   if (motiv.efekt && /^[a-z0-9-]+$/.test(motiv.efekt)) {
