@@ -48,17 +48,62 @@ def polohy_listku():
     return vysledek
 
 
-def nacti(cesta, rozmer):
+def nacti(cesta, rozmer, predloha, format, polohy):
     im = Image.open(cesta).convert('RGB')
-    if im.size != rozmer:
-        # zachovat poměr stran: zmenšit na výšku/šířku cíle a oříznout přesah na střed
-        meritko = max(rozmer[0] / im.width, rozmer[1] / im.height)
-        im = im.resize((round(im.width * meritko), round(im.height * meritko)), Image.LANCZOS)
-        x = (im.width - rozmer[0]) // 2
-        y = (im.height - rozmer[1]) // 2
-        im = im.crop((x, y, x + rozmer[0], y + rozmer[1]))
-        print(f'  rozměr upraven na {rozmer[0]} × {rozmer[1]} (oříznutí na střed)')
-    return im
+    if im.size == rozmer:
+        return im
+    # Jiný rozměr nebo poměr stran (např. čtverec dodaný jako 3:2): lístky se najdou
+    # v různých měřítkách a malba se zvětší a ořízne tak, aby seděly na předlohu.
+    a = np.asarray(predloha, dtype=np.float32)
+    b = np.asarray(im, dtype=np.float32)
+    listek = FORMATY[format][2] * rozmer[0]
+    vzor = int(listek * 0.8) // 2 * 2
+    P = np.array([(p[format][0] / 100 * rozmer[0], p[format][1] / 100 * rozmer[1]) for p in polohy.values()])
+    nejlepsi = None
+    for s in np.geomspace(0.3, 3, 90):  # px zdroje na px cíle
+        if vzor * s < 12 or vzor * s >= min(b.shape[:2]):
+            continue
+        skore, Q = 0, []
+        for px, py in P:
+            t = a[int(py) - vzor // 2:int(py) + vzor // 2, int(px) - vzor // 2:int(px) + vzor // 2]
+            t = cv2.resize(t, None, fx=s, fy=s, interpolation=cv2.INTER_AREA if s < 1 else cv2.INTER_CUBIC)
+            r = cv2.matchTemplate(b, t, cv2.TM_CCOEFF_NORMED)
+            _, mx, _, loc = cv2.minMaxLoc(r)
+            skore += mx
+            Q.append((loc[0] + t.shape[1] / 2, loc[1] + t.shape[0] / 2))
+        if nejlepsi is None or skore > nejlepsi[0]:
+            nejlepsi = (skore, np.array(Q))
+    shoda, Q = nejlepsi[0] / len(P), nejlepsi[1]
+    if shoda < 0.5:
+        sys.exit(f'  rozměr {im.width} × {im.height} se liší a lístky se nepodařilo najít (podobnost {shoda:.2f}); '
+                 f'potřebná je malba {rozmer[0]} × {rozmer[1]}.')
+    # P = k * Q + t, stejné měřítko v obou osách
+    A = np.zeros((2 * len(P), 3))
+    y = np.zeros(2 * len(P))
+    for i, (q, p) in enumerate(zip(Q, P)):
+        A[2 * i] = (q[0], 1, 0)
+        y[2 * i] = p[0]
+        A[2 * i + 1] = (q[1], 0, 1)
+        y[2 * i + 1] = p[1]
+    (k, tx, ty), *_ = np.linalg.lstsq(A, y, rcond=None)
+    m = np.float32([[k, 0, tx], [0, k, ty]])
+    # jemné doladění a jediné převzorkování z originálu
+    hruba = Image.fromarray(cv2.warpAffine(np.asarray(im), m, rozmer, flags=cv2.INTER_LANCZOS4, borderMode=cv2.BORDER_REPLICATE))
+    posuny, _ = zmer_posuny(predloha, hruba, format, polohy)
+    jemne = srovnani(posuny, polohy, format, rozmer, tise=True)
+    if jemne is not None:
+        m = (np.vstack([jemne, (0, 0, 1)]) @ np.vstack([m, (0, 0, 1)]))[:2].astype(np.float32)
+    zpet = cv2.invertAffineTransform(m)
+    x0, y0 = zpet @ (0, 0, 1)
+    x1, y1 = zpet @ (rozmer[0], rozmer[1], 1)
+    print(f'  rozměr {im.width} × {im.height} převeden na {rozmer[0]} × {rozmer[1]} podle lístků: '
+          f'zvětšení {m[0, 0]:.2f}×, výřez x {x0:.0f}–{x1:.0f}, y {y0:.0f}–{y1:.0f}')
+    if x0 < -2 or y0 < -2 or x1 > im.width + 2 or y1 > im.height + 2:
+        print('  POZOR: výřez přesahuje malbu, okraj se doplní opakováním krajních pixelů')
+    if m[0, 0] > 1.15:
+        print('  POZOR: malba se zvětšuje, bude méně ostrá; ostřejší bude malba přímo v rozměru '
+              f'{rozmer[0]} × {rozmer[1]}')
+    return Image.fromarray(cv2.warpAffine(np.asarray(im), m, rozmer, flags=cv2.INTER_LANCZOS4, borderMode=cv2.BORDER_REPLICATE))
 
 
 def zmer_posuny(predloha, malba, format, polohy):
@@ -91,7 +136,7 @@ def zmer_posuny(predloha, malba, format, polohy):
     return vysledek, FORMATY[format][2] * sirka
 
 
-def srovnani(posuny, polohy, format, rozmer):
+def srovnani(posuny, polohy, format, rozmer, tise=False):
     """Matice, která lístky malby přesune na polohy předlohy (posun, případně i mírné měřítko).
     Vrací None, když malba sedí."""
     P = np.array([(p[format][0] / 100 * rozmer[0], p[format][1] / 100 * rozmer[1]) for p in polohy.values()])
@@ -113,7 +158,8 @@ def srovnani(posuny, polohy, format, rozmer):
             popis = f'měřítko {s[0]:.3f} × {s[1]:.3f}, posun {tt[0]:+.1f} a {tt[1]:+.1f} px'
     if abs(m[0, 2]) < 0.5 and abs(m[1, 2]) < 0.5 and abs(m[0, 0] - 1) < 0.001 and abs(m[1, 1] - 1) < 0.001:
         return None
-    print('  srovnání malby: ' + popis)
+    if not tise:
+        print('  srovnání malby: ' + popis)
     return m
 
 
@@ -159,7 +205,7 @@ def main():
         rozmer, male, _ = FORMATY[format]
         print(f'{format}: {getattr(arg, format)}')
         predloha = Image.open(os.path.join(MOTIVY, PREDLOHA, format + '.webp')).convert('RGB')
-        malba = nacti(getattr(arg, format), rozmer)
+        malba = nacti(getattr(arg, format), rozmer, predloha, format, polohy)
 
         posuny, listek = zmer_posuny(predloha, malba, format, polohy)
         m = srovnani(posuny, polohy, format, rozmer)

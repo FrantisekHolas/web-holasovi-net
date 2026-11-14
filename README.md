@@ -34,17 +34,17 @@ Malba stromu se mění podle ročního období a svátků, podobně jako sváte�
 
 | Motiv | Kdy | Malba |
 |---|---|---|
-| jaro, léto, podzim, zima | astronomicky, od okamžiku rovnodennosti nebo slunovratu (kolem 20. 3., 21. 6., 23. 9. a 21. 12.) | jaro, léto a podzim |
-| Vánoce | 24.–26. 12. | zatím není |
-| Silvestr a Nový rok | 31. 12.–1. 1., s ohňostrojem | zatím není |
-| Velikonoce | Zelený čtvrtek – Velikonoční pondělí | zatím není |
+| jaro, léto, podzim, zima | astronomicky, od okamžiku rovnodennosti nebo slunovratu (kolem 20. 3., 21. 6., 23. 9. a 21. 12.) | všechna čtyři |
+| Vánoce | 24.–26. 12. | zatím není (použije se zima) |
+| Silvestr a Nový rok | 31. 12.–1. 1., s ohňostrojem | zatím není (použije se zima v nočním režimu) |
+| Velikonoce | Zelený čtvrtek – Velikonoční pondělí | zatím není (použije se jaro) |
 
 Svátky mají přednost před ročním obdobím. Rozhoduje datum a čas v Česku. Dokud motiv nemá vlastní malbu, použije se malba ročního období a nakonec podzim.
 
 Seznam motivů a jejich termíny jsou v [`assets/js/motivy.js`](assets/js/motivy.js). Nová malba se přidá takto:
 
 1. V Gemini se upraví stávající podzimní malba (čtverec, na výšku i panorama zvlášť), aby kompozice, kmen a pět velkých lístků zůstaly na místě.
-2. Nástroj [`nastroje/priprav-motiv.py`](nastroje/priprav-motiv.py) změří polohu lístků proti podzimní předloze, malby srovná a uloží do `assets/img/motivy/<motiv>/` ve všech velikostech (`ctverec.webp` 1500 × 1500, `ctverec-900.webp`, `pozadi.webp`, `vyska.webp` 1116 × 2000, `vyska-720.webp`, `panorama.webp` 2000 × 557, `panorama-1200.webp`). Když některý lístek nesedí, upozorní na to.
+2. Nástroj [`nastroje/priprav-motiv.py`](nastroje/priprav-motiv.py) změří polohu lístků proti podzimní předloze, malby srovná a uloží do `assets/img/motivy/<motiv>/` ve všech velikostech (`ctverec.webp` 1500 × 1500, `ctverec-900.webp`, `pozadi.webp`, `vyska.webp` 1116 × 2000, `vyska-720.webp`, `panorama.webp` 2000 × 557, `panorama-1200.webp`). Malbu v jiném poměru stran (např. čtverec dodaný jako 3:2) převede podle lístků, jen bude méně ostrá. Když některý lístek nesedí, upozorní na to.
    ```
    python3 nastroje/priprav-motiv.py zima --ctverec ctverec.jpg --vyska vyska.jpg --panorama panorama.jpg
    ```
