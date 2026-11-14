@@ -172,9 +172,34 @@
       sezona: sezona,
       svatek: svatek ? svatek.id : null,
       efekt: motiv.efekt || null,
+      noc: motiv.noc || null,
       vlastniObrazky: !!(motiv.obrazky && motiv.obrazky.length),
       zdroje: zdroje
     };
+  }
+
+  // ---------- Den a noc ----------
+
+  var MISTO = nastaveni.misto || { sirka: 49.195, delka: 16.608 };
+
+  // Výška slunce nad obzorem ve stupních (zjednodušený výpočet, přesnost asi 0,2°).
+  function vyskaSlunce(cas, sirka, delka) {
+    var d = cas / 86400000 - 10957.5;  // dny od 1. 1. 2000 12:00 UTC
+    var M = (357.5291 + 0.98560028 * d) * STUPEN;
+    var C = (1.9148 * Math.sin(M) + 0.02 * Math.sin(2 * M) + 0.0003 * Math.sin(3 * M)) * STUPEN;
+    var L = M + C + (180 + 102.9372) * STUPEN;
+    var e = 23.4397 * STUPEN;
+    var dekl = Math.asin(Math.sin(L) * Math.sin(e));
+    var rekt = Math.atan2(Math.sin(L) * Math.cos(e), Math.cos(L));
+    var hodinovyUhel = (280.16 + 360.9856235 * d + delka) * STUPEN - rekt;
+    var fi = sirka * STUPEN;
+    return Math.asin(Math.sin(fi) * Math.sin(dekl) + Math.cos(fi) * Math.cos(dekl) * Math.cos(hodinovyUhel)) / STUPEN;
+  }
+
+  // 0 = den (slunce výš než 2° nad obzorem), 1 = noc (slunce níž než 8° pod obzorem), mezi tím soumrak.
+  function miraNoci(cas) {
+    var t = Math.min(1, Math.max(0, (2 - vyskaSlunce(cas, MISTO.sirka, MISTO.delka)) / 10));
+    return t * t * (3 - 2 * t);
   }
 
   // ---------- Parametry adresy pro vyzkoušení ----------
@@ -199,7 +224,9 @@
     velikonocniNedele: velikonocniNedele,
     casVPraze: casVPraze,
     casZPrahy: casZPrahy,
-    vyberMotiv: vyberMotiv
+    vyberMotiv: vyberMotiv,
+    vyskaSlunce: vyskaSlunce,
+    miraNoci: miraNoci
   };
 
   // ---------- Malba ----------
@@ -242,6 +269,38 @@
 
   var pozadi = document.querySelector('.scena__pozadi');
   if (pozadi) pozadi.style.backgroundImage = 'url("' + cesta(motiv.zdroje.ctverec, 'pozadi.webp') + '")';
+
+  // Noc: krajina potemní, obloha zmodrá a lístky svítí (styly v assets/css/styl.css, část Den a noc).
+  // Přepočítává se každou minutu, takže otevřená stránka se večer pomalu stmívá.
+  var vynucenaNoc = parseFloat(parametry.noc);
+  var minulaNoc = null;
+  function nastavNoc() {
+    var noc;
+    if (!isNaN(vynucenaNoc)) noc = Math.min(1, Math.max(0, vynucenaNoc));
+    else if (motiv.noc === 'vzdy') noc = 1;
+    else if (motiv.noc === 'malba') noc = 0;
+    else {
+      try { noc = miraNoci(H.ted()); } catch (e) { noc = 0; }
+    }
+    noc = Math.round(noc * 100) / 100;
+    if (noc === minulaNoc) return;
+    minulaNoc = noc;
+    H.noc = noc;
+    root.setAttribute('data-den', noc >= 0.5 ? 'noc' : 'den');
+    if (!noc) {
+      ['--noc', '--zare-noc', '--filtr-malby', '--filtr-pozadi'].forEach(function (v) { root.style.removeProperty(v); });
+      return;
+    }
+    root.style.setProperty('--noc', noc);
+    root.style.setProperty('--zare-noc', (0.7 * noc).toFixed(3));
+    root.style.setProperty('--filtr-malby',
+      'brightness(' + (1 - 0.6 * noc).toFixed(3) + ') saturate(' + (1 - 0.2 * noc).toFixed(3) + ') contrast(' + (1 + 0.05 * noc).toFixed(3) + ')');
+    root.style.setProperty('--filtr-pozadi',
+      'blur(30px) saturate(' + (1.15 - 0.05 * noc).toFixed(3) + ') brightness(' + (0.78 - 0.48 * noc).toFixed(3) + ')');
+  }
+  nastavNoc();
+  setInterval(nastavNoc, 60000);
+  document.addEventListener('visibilitychange', function () { if (!document.hidden) nastavNoc(); });
 
   if (motiv.efekt && /^[a-z0-9-]+$/.test(motiv.efekt)) {
     var skript = document.createElement('script');

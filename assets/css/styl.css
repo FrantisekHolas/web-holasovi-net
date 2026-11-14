@@ -97,7 +97,7 @@ body {
   inset: -10%;
   /* obrázek doplní assets/js/obdobi.js podle motivu */
   background: center / cover no-repeat;
-  filter: blur(30px) saturate(1.15) brightness(0.78);
+  filter: var(--filtr-pozadi, blur(30px) saturate(1.15) brightness(0.78));
 }
 .scena::after {
   content: '';
@@ -208,7 +208,7 @@ button.listek::before {
   border-radius: 50%;
   background: radial-gradient(closest-side, var(--zare) 0%, rgba(255, 240, 200, 0) 100%);
   mix-blend-mode: screen;
-  opacity: 0;
+  opacity: var(--zare-noc, 0);
   transition: opacity 0.3s ease;
   pointer-events: none;
 }
@@ -369,25 +369,24 @@ button.listek:focus-visible .listek__jmeno { opacity: 1; }
   height: 100%;
   pointer-events: none;
 }
-/* Noc pro ohňostroj, dokud motiv nemá vlastní noční malbu: krajina potemní a lístky svítí jako lucerny. */
-.scena--noc .scena__pozadi { filter: blur(30px) saturate(1.1) brightness(0.3); }
-.scena--noc .platno img { filter: brightness(0.4) saturate(0.8) contrast(1.05); }
-.scena--noc .platno::before {
+
+/* ---------- Den a noc (assets/js/obdobi.js) ----------
+   Skript podle výšky slunce nastaví --noc (0 den … 1 noc) a z ní odvozené filtry:
+   krajina potemní, obloha zmodrá a lístky svítí jako lucerny. */
+.platno img { filter: var(--filtr-malby, none); }
+.platno::before {
   content: '';
   position: absolute;
   inset: 0;
   pointer-events: none;
+  opacity: var(--noc, 0);
   background: linear-gradient(to bottom, rgba(8, 14, 46, 0.68), rgba(8, 14, 46, 0.4) 50%, rgba(8, 14, 46, 0.2));
   -webkit-mask-image: radial-gradient(ellipse 64% 64% at 50% 50%, #000 70%, transparent 100%);
   mask-image: radial-gradient(ellipse 64% 64% at 50% 50%, #000 70%, transparent 100%);
 }
 @media (max-aspect-ratio: 3/4), (min-aspect-ratio: 21/10) {
-  .scena--noc .platno::before { -webkit-mask-image: none; mask-image: none; }
+  .platno::before { -webkit-mask-image: none; mask-image: none; }
 }
-.scena--noc button.listek::before { opacity: 0.7; }
-.scena--noc button.listek:hover::before,
-.scena--noc button.listek:focus-visible::before,
-.scena--noc button.listek[aria-expanded='true']::before { opacity: 1; }
 
 /* ---------- Bez JavaScriptu ---------- */
 .bez-skriptu {

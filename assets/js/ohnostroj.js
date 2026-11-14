@@ -20,9 +20,6 @@
   if (!ctx) return;
   scena.appendChild(platno);
 
-  // bez vlastní noční malby se krajina setmí
-  if (!motiv.vlastniObrazky) scena.classList.add('scena--noc');
-
   var klid = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
   var ted = H.ted || function () { return Date.now(); };
 

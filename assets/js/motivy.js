@@ -17,11 +17,21 @@
 
   Efekt (pole "efekt") je skript assets/js/<efekt>.js, např. 'ohnostroj'.
 
-  Vyzkoušení předem: holasovi.net/?motiv=zima nebo holasovi.net/?datum=2026-12-31T23:59:50
+  Den a noc: malba se večer podle výšky slunce nad místem "misto" postupně setmí
+  (od chvíle, kdy je slunce 2° nad obzorem, do plné noci při 8° pod obzorem) a ráno zase rozjasní.
+  Pole "noc" u motivu to může změnit:
+    noc: 'vzdy'   = motiv je celý den v nočním režimu (Silvestr kvůli ohňostroji)
+    noc: 'malba'  = malba motivu je sama noční, nic se neztmavuje
+
+  Vyzkoušení předem: holasovi.net/?motiv=zima, holasovi.net/?datum=2026-12-31T23:59:50,
+  holasovi.net/?datum=2026-11-14T16:45 (soumrak) nebo holasovi.net/?noc=1 (0 = den, 0.5 = šero)
 */
 window.HOLASOVI = window.HOLASOVI || {};
 window.HOLASOVI.motivy = {
   vychozi: 'podzim',
+
+  // místo, podle jehož slunce se střídá den a noc
+  misto: { nazev: 'Brno', sirka: 49.195, delka: 16.608 },
 
   obdobi: {
     jaro:   { nazev: 'Jaro',   obrazky: [] },
@@ -32,7 +42,7 @@ window.HOLASOVI.motivy = {
 
   svatky: [
     { id: 'vanoce',     nazev: 'Vánoce',              od: '24. 12.',        do: '26. 12.',       obrazky: [] },
-    { id: 'silvestr',   nazev: 'Silvestr a Nový rok', od: '31. 12.',        do: '1. 1.',         obrazky: [], efekt: 'ohnostroj' },
+    { id: 'silvestr',   nazev: 'Silvestr a Nový rok', od: '31. 12.',        do: '1. 1.',         obrazky: [], efekt: 'ohnostroj', noc: 'vzdy' },
     { id: 'velikonoce', nazev: 'Velikonoce',          od: 'Velikonoce -3',  do: 'Velikonoce +1', obrazky: [] }
   ]
 };

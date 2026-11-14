@@ -52,7 +52,9 @@ Vyzkoušet motiv předem jde přes adresu:
 - `https://holasovi.net/?motiv=zima` ukáže zvolený motiv,
 - `https://holasovi.net/?datum=2026-12-31T23:59:50` spustí stránku jako v daném okamžiku (český čas), včetně půlnočního ohňostroje.
 
-**Ohňostroj** (`assets/js/ohnostroj.js`): rakety v barvách lístků startují samy a klepnutí na oblohu mimo lístky vypustí další. O půlnoci na Nový rok přijde dvanáctivteřinové finále. Dokud Silvestr nemá vlastní noční malbu, krajina se setmí a lístky svítí jako lucerny. Při zapnutém omezení pohybu v systému startují rakety jen po klepnutí.
+**Den a noc:** večer se strom podle skutečného slunce nad Brnem postupně stmívá. Krajina potemní, obloha zmodrá a lístky svítí jako lucerny. Ráno se zase rozjasní. Soumrak začíná, když je slunce 2° nad obzorem, plná noc nastane při 8° pod obzorem (v listopadu zhruba 16:00–17:00). Otevřená stránka se přepočítává každou minutu. Místo je v `motivy.js` (`misto`). Motiv může mít `noc: 'vzdy'` (celý den noční režim) nebo `noc: 'malba'` (malba je sama noční, nic se neztmavuje). Vyzkoušení: `?noc=1` (noc), `?noc=0.5` (šero), `?noc=0` (den).
+
+**Ohňostroj** (`assets/js/ohnostroj.js`): na Silvestra a na Nový rok celý den. Rakety v barvách lístků startují samy a klepnutí na oblohu mimo lístky vypustí další. O půlnoci na Nový rok přijde dvanáctivteřinové finále. Oba dny je strom v nočním režimu, aby ohňostroj vynikl. Při zapnutém omezení pohybu v systému startují rakety jen po klepnutí.
 
 ## Jak web funguje
 
