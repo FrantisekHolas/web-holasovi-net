@@ -51,8 +51,7 @@ window.HOLASOVI = {
       poloha: { ctverec: [83.0, 48.53], vyska: [83.33, 42.5], panorama: [59.2, 49.37] },
       kontakty: [
         { typ: 'email', uzivatel: 'veruska', domena: 'holasovi.net' },
-        // ve veřejném seznamu datových schránek zatím není, proto bez odkazu
-        { typ: 'datovka', id: '26ycu7i', overit: false }
+        { typ: 'datovka', id: '26ycu7i' }
       ],
       odkazy: [
         { popis: 'Podnikatelský profil', text: 'IČO 06635971', url: 'vera-profil-06635971/', ikona: 'firma' }
