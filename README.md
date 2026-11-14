@@ -34,7 +34,7 @@ Malba stromu se mění podle ročního období a svátků, podobně jako sváte�
 
 | Motiv | Kdy | Malba |
 |---|---|---|
-| jaro, léto, podzim, zima | astronomicky, od okamžiku rovnodennosti nebo slunovratu (kolem 20. 3., 21. 6., 23. 9. a 21. 12.) | zatím jen podzim |
+| jaro, léto, podzim, zima | astronomicky, od okamžiku rovnodennosti nebo slunovratu (kolem 20. 3., 21. 6., 23. 9. a 21. 12.) | jaro a podzim |
 | Vánoce | 24.–26. 12. | zatím není |
 | Silvestr a Nový rok | 31. 12.–1. 1., s ohňostrojem | zatím není |
 | Velikonoce | Zelený čtvrtek – Velikonoční pondělí | zatím není |
@@ -44,7 +44,11 @@ Svátky mají přednost před ročním obdobím. Rozhoduje datum a čas v Česku
 Seznam motivů a jejich termíny jsou v [`assets/js/motivy.js`](assets/js/motivy.js). Nová malba se přidá takto:
 
 1. V Gemini se upraví stávající podzimní malba (čtverec, na výšku i panorama zvlášť), aby kompozice, kmen a pět velkých lístků zůstaly na místě.
-2. Malby se zarovnají na podzimní předlohu a uloží do `assets/img/motivy/<motiv>/` ve stejných rozměrech: `ctverec.webp` (1500 × 1500), `ctverec-900.webp`, `pozadi.webp` (48 px, rozmazané pozadí), `vyska.webp` (1116 × 2000), `vyska-720.webp`, `panorama.webp` (2000 × 557), `panorama-1200.webp`.
+2. Nástroj [`nastroje/priprav-motiv.py`](nastroje/priprav-motiv.py) změří polohu lístků proti podzimní předloze, malby srovná a uloží do `assets/img/motivy/<motiv>/` ve všech velikostech (`ctverec.webp` 1500 × 1500, `ctverec-900.webp`, `pozadi.webp`, `vyska.webp` 1116 × 2000, `vyska-720.webp`, `panorama.webp` 2000 × 557, `panorama-1200.webp`). Když některý lístek nesedí, upozorní na to.
+   ```
+   python3 nastroje/priprav-motiv.py zima --ctverec ctverec.jpg --vyska vyska.jpg --panorama panorama.jpg
+   ```
+   Potřebuje Python 3 s balíčky pillow, numpy a opencv-python.
 3. V `motivy.js` se u motivu doplní dodané verze, např. `obrazky: ['ctverec', 'vyska', 'panorama']`.
 
 Vyzkoušet motiv předem jde přes adresu:
@@ -82,6 +86,7 @@ assets/js/strom.js      lístky a karta s kontaktem
 assets/img/motivy/      malby stromu a pozadí pro jednotlivé motivy
 assets/img/nahled.jpg   náhled pro sdílení odkazu
 assets/fonts/           písma Cinzel, Cinzel Decorative a EB Garamond
+nastroje/priprav-motiv.py  příprava maleb nového motivu (není součástí webu)
 ```
 
 ## Zveřejnění na GitHub Pages

@@ -34,7 +34,7 @@ window.HOLASOVI.motivy = {
   misto: { nazev: 'Brno', sirka: 49.195, delka: 16.608 },
 
   obdobi: {
-    jaro:   { nazev: 'Jaro',   obrazky: [] },
+    jaro:   { nazev: 'Jaro',   obrazky: ['ctverec', 'vyska', 'panorama'] },
     leto:   { nazev: 'Léto',   obrazky: [] },
     podzim: { nazev: 'Podzim', obrazky: ['ctverec', 'vyska', 'panorama'] },
     zima:   { nazev: 'Zima',   obrazky: [] }
