@@ -1,5 +1,5 @@
 /*
- * Podnikatelský profil Mgr. Františka Holase (holasovi.net/frantisek-profil-88722520/).
+ * Podnikatelské profily členů rodiny (holasovi.net/frantisek-profil-88722520/, vera-profil-06635971/).
  * Rozložení podle conceptual.cz, bez loga, černobílé. Světlý a tmavý režim: výchozí podle
  * prohlížeče, přepínač v záhlaví nastaví <html data-theme="light|dark"> (assets/profil.js).
  *
@@ -215,7 +215,7 @@ h2::before { content: ""; width: 6px; height: 1.1em; border-radius: 3px; backgro
 .kopirovat[data-stav="hotovo"] { color: var(--ink); border-color: var(--ink); }
 
 /* Bankovní účty */
-.ucty { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+.ucty { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
 .ucet { padding: 22px 26px; }
 .ucet h3 { margin: 0 0 .75rem; font-size: 1rem; font-weight: 700; }
 .ucet dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: .45rem 1rem; align-items: baseline; }

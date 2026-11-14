@@ -6,6 +6,8 @@
   Kontakty (pole "kontakty"):
     { typ: 'email', uzivatel: 'jmeno', domena: 'holasovi.net' }   -> jmeno@holasovi.net
     { typ: 'telefon', cislo: '+420 123 456 789' }
+    { typ: 'datovka', id: 'abc1234' }   -> odkaz do veřejného seznamu datových schránek;
+                                          overit: false = jen ID bez odkazu (schránka v seznamu není)
   E-mail je rozdělený na dvě části, aby ho roboti sbírající adresy hůř našli.
   Volitelně lze u kontaktu změnit popisek, např. popis: 'Pracovní e-mail'.
 
@@ -32,6 +34,7 @@ window.HOLASOVI = {
       poloha: { ctverec: [39.07, 23.33], vyska: [39.34, 25.95], panorama: [47.25, 22.98] },
       kontakty: [
         { typ: 'email', uzivatel: 'frantisek', domena: 'holasovi.net' },
+        { typ: 'datovka', id: 'vefda5d' },
         { typ: 'telefon', cislo: '+420 776 280 026' }
       ],
       odkazy: [
@@ -47,9 +50,13 @@ window.HOLASOVI = {
       zare: 'rgba(255, 140, 120, 0.75)',
       poloha: { ctverec: [83.0, 48.53], vyska: [83.33, 42.5], panorama: [59.2, 49.37] },
       kontakty: [
-        { typ: 'email', uzivatel: 'veruska', domena: 'holasovi.net' }
+        { typ: 'email', uzivatel: 'veruska', domena: 'holasovi.net' },
+        // ve veřejném seznamu datových schránek zatím není, proto bez odkazu
+        { typ: 'datovka', id: '26ycu7i', overit: false }
       ],
-      odkazy: []
+      odkazy: [
+        { popis: 'Podnikatelský profil', text: 'IČO 06635971', url: 'vera-profil-06635971/', ikona: 'firma' }
+      ]
     },
     {
       jmeno: 'Lukáš',

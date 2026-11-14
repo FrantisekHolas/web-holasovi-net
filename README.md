@@ -28,15 +28,24 @@ odkazy: [
 
 E-mail je rozdělený na dvě části, aby ho roboti sbírající adresy hůř našli.
 
-## Podnikatelský profil Františka
+## Podnikatelské profily
 
-Na kartě Františka je odkaz **Podnikatelský profil** na stránku https://holasovi.net/frantisek-profil-88722520/ (anglicky `en/`, německy `de/`). Obsahuje údaje podle vzoru conceptual.cz: IČO, DIČ, plátcovství DPH, právní formu, místo a předmět podnikání, správce daně, bankovní účty zveřejněné v registru plátců DPH a kontakt včetně datové schránky, s odkazy do živnostenského rejstříku (RŽP), registru plátců DPH (ADIS), systému VIES a registru datových schránek.
+Na kartách Františka a Věrky je odkaz **Podnikatelský profil**:
 
-- Stránka nemá logo a je černobílá. Světlý nebo tmavý režim se řídí prohlížečem, přepínač v záhlaví volbu změní a zapamatuje.
+| Člen | Stránka |
+|---|---|
+| František | https://holasovi.net/frantisek-profil-88722520/ |
+| Věrka | https://holasovi.net/vera-profil-06635971/ |
+
+Každý profil je česky, anglicky (`en/`) a německy (`de/`). Obsahuje údaje podle vzoru conceptual.cz: IČO, DIČ, plátcovství DPH, právní formu, místo a předmět podnikání, správce daně, bankovní účty zveřejněné v registru plátců DPH a kontakt včetně datové schránky, s odkazy do živnostenského rejstříku (RŽP), registru plátců DPH (ADIS), systému VIES a registru datových schránek.
+
+- Stránky nemají logo a jsou černobílé. Světlý nebo tmavý režim se řídí prohlížečem, přepínač v záhlaví volbu změní a zapamatuje.
 - Česká stránka pošle návštěvníka s anglickým nebo německým prohlížečem na jeho jazyk. Ruční volba jazyka se zapamatuje.
-- IČO, DIČ, čísla účtů a IBAN jdou zkopírovat tlačítkem.
-- Stránky se generují nástrojem [`nastroje/profil-frantisek.py`](nastroje/profil-frantisek.py) z údajů a překladů v něm; po změně stačí upravit tento soubor a spustit `python3 nastroje/profil-frantisek.py`. Vzhled a skript jsou ve `frantisek-profil-88722520/assets/`.
-- Údaje jsou z ARES, živnostenského rejstříku a registru plátců DPH ke 14. 11. 2026.
+- IČO, DIČ, čísla účtů, IBAN a ID datové schránky jdou zkopírovat tlačítkem.
+- Stránky se generují nástrojem [`nastroje/profily.py`](nastroje/profily.py) z údajů a překladů v něm; po změně stačí upravit tento soubor a spustit `python3 nastroje/profily.py`. Společný vzhled a skript jsou v `assets/profil/`, ikona každého profilu (lístek se zlatou iniciálou) v jeho složce `ikony/`.
+- Údaje jsou z ARES, živnostenského rejstříku, registru plátců DPH a seznamu datových schránek ke 14. 11. 2026.
+
+V kartách na stromě jsou i osobní datové schránky (`{ typ: 'datovka', id: '…' }` v `clenove.js`). Odkaz do registru se ukáže jen u schránky, která je ve veřejném seznamu; jinak (`overit: false`) jen její ID.
 
 ## Motivy podle období
 
@@ -97,8 +106,10 @@ assets/img/motivy/      malby stromu a pozadí pro jednotlivé motivy
 assets/img/nahled.jpg   náhled pro sdílení odkazu
 assets/fonts/           písma Cinzel, Cinzel Decorative a EB Garamond
 frantisek-profil-88722520/  podnikatelský profil Františka (cs, en/, de/)
+vera-profil-06635971/       podnikatelský profil Věrky (cs, en/, de/)
+assets/profil/              společný vzhled, skript a písmo Inter profilů
 nastroje/priprav-motiv.py  příprava maleb nového motivu (není součástí webu)
-nastroje/profil-frantisek.py  generátor podnikatelského profilu (není součástí webu)
+nastroje/profily.py        generátor podnikatelských profilů (není součástí webu)
 ```
 
 ## Zveřejnění na GitHub Pages

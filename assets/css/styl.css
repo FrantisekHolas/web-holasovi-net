@@ -334,6 +334,8 @@ button.listek:focus-visible .listek__jmeno { opacity: 1; }
   transition: background 0.2s ease, border-color 0.2s ease;
 }
 .odkaz:hover { background: #fff3da; border-color: var(--zlato); }
+.odkaz--text:hover { background: #fffaf0; border-color: #e0c98f; }
+.odkaz--text .odkaz__adresa { user-select: all; }
 .odkaz:focus-visible { outline: 3px solid var(--hneda); outline-offset: 2px; }
 .odkaz__ikona, .odkaz__sipka { flex: none; fill: none; stroke: #8a5a1a; stroke-linecap: round; stroke-linejoin: round; }
 .odkaz__ikona { width: 22px; height: 22px; stroke-width: 1.8; }

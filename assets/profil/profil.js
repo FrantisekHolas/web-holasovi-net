@@ -1,5 +1,5 @@
 /*
- * Podnikatelský profil: jazyk, světlý/tmavý režim a kopírování údajů.
+ * Podnikatelské profily: jazyk, světlý/tmavý režim a kopírování údajů.
  * Načítá se v <head>, aby se zvolený režim a jazyk uplatnily ještě před vykreslením.
  *
  * Jazyk (podle conceptual.cz):

@@ -14,8 +14,10 @@
     email: '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 7l8.5 6 8.5-6"/>',
     telefon: '<path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/>',
     web: '<circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.6 2.8 3.9 5.8 3.9 9s-1.3 6.2-3.9 9c-2.6-2.8-3.9-5.8-3.9-9s1.3-6.2 3.9-9z"/>',
-    firma: '<rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/><path d="M3 13h18"/>'
+    firma: '<rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/><path d="M3 13h18"/>',
+    schranka: '<path d="M22 12h-6l-2 3h-4l-2-3H2"/><path d="M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/>'
   };
+  var REGISTR_SCHRANEK = 'https://www.datovka.gov.cz/sds/detail?dbid=';
   var SIPKA = '<svg class="odkaz__sipka" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7"/><path d="M8 7h9v9"/></svg>';
   var DALE = '<svg class="odkaz__sipka" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>';
 
@@ -55,6 +57,9 @@
         polozky.push({ ikona: 'email', popis: k.popis || 'E-mail', text: adresa, url: 'mailto:' + adresa, venku: false });
       } else if (k.typ === 'telefon' && k.cislo) {
         polozky.push({ ikona: 'telefon', popis: k.popis || 'Telefon', text: k.cislo, url: 'tel:' + k.cislo.replace(/[^+\d]/g, ''), venku: false });
+      } else if (k.typ === 'datovka' && k.id) {
+        // odkaz do veřejného seznamu datových schránek, jen pokud je schránka v seznamu dohledatelná
+        polozky.push({ ikona: 'schranka', popis: k.popis || 'Datová schránka', text: k.id, url: k.overit === false ? null : REGISTR_SCHRANEK + encodeURIComponent(k.id), venku: true });
       }
     });
     (clen.odkazy || []).forEach(function (o) {
@@ -84,17 +89,20 @@
     kartaOdkazy.hidden = polozky.length === 0;
     polozky.forEach(function (p) {
       var li = document.createElement('li');
-      var a = document.createElement('a');
-      a.className = 'odkaz';
-      a.href = p.url;
-      if (p.venku) {
-        a.target = '_blank';
-        a.rel = 'noopener';
+      // položka bez adresy (např. neověřitelná datová schránka) je jen text
+      var a = document.createElement(p.url ? 'a' : 'div');
+      a.className = p.url ? 'odkaz' : 'odkaz odkaz--text';
+      if (p.url) {
+        a.href = p.url;
+        if (p.venku) {
+          a.target = '_blank';
+          a.rel = 'noopener';
+        }
       }
       a.innerHTML =
         '<svg class="odkaz__ikona" viewBox="0 0 24 24" aria-hidden="true">' + IKONY[p.ikona] + '</svg>' +
         '<span class="odkaz__texty"><span class="odkaz__popis"></span><span class="odkaz__adresa"></span></span>' +
-        (p.venku ? SIPKA : p.interni ? DALE : '');
+        (!p.url ? '' : p.venku ? SIPKA : p.interni ? DALE : '');
       a.querySelector('.odkaz__popis').textContent = p.popis;
       a.querySelector('.odkaz__adresa').textContent = p.text;
       li.appendChild(a);
