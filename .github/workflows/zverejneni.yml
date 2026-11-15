@@ -1,0 +1,57 @@
+# Zveřejnění webu na GitHub Pages: zveřejní jen soubory webu, ne návody a nástroje.
+# Běží po každém nahrání do main; ručně: záložka Actions → Zveřejnění webu → Run workflow.
+# V Settings → Pages musí být Build and deployment → Source: GitHub Actions.
+name: Zveřejnění webu
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  zverejneni:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.nasazeni.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Sestavit web jen ze souborů webu
+        env:
+          # co se nezveřejňuje: návody, nástroje a nastavení repozitáře (cesty od kořene)
+          VYNECHAT: >-
+            README.md
+            nastroje
+            .github
+            .gitignore
+            .gitattributes
+        run: |
+          mkdir _site
+          git archive --format=tar HEAD | tar -x -C _site
+          for p in $VYNECHAT; do rm -rf "_site/$p"; done
+          test -f _site/index.html
+          for p in $VYNECHAT; do
+            if [ -e "_site/$p" ]; then echo "::error::$p se nesmí zveřejnit"; exit 1; fi
+          done
+          echo "Zveřejní se $(find _site -type f | wc -l) souborů:"
+          find _site -type f | sed 's|^_site/||' | sort
+
+      - uses: actions/configure-pages@v6
+
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: _site
+
+      - name: Nasadit
+        id: nasazeni
+        uses: actions/deploy-pages@v5

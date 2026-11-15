@@ -110,15 +110,17 @@ vera-profil-06635971/       podnikatelský profil Věrky (cs, en/, de/)
 assets/profil/              společný vzhled, skript a písmo Inter profilů
 nastroje/priprav-motiv.py  příprava maleb nového motivu (není součástí webu)
 nastroje/profily.py        generátor podnikatelských profilů (není součástí webu)
+.github/workflows/zverejneni.yml  zveřejnění webu na GitHub Pages (jen soubory webu)
 ```
 
 ## Zveřejnění na GitHub Pages
 
+Web zveřejňuje úloha GitHub Actions `.github/workflows/zverejneni.yml` po každém nahrání do `main` (ručně: záložka **Actions → Zveřejnění webu → Run workflow**). Zveřejní jen soubory webu: `README.md`, složka `nastroje/` a nastavení repozitáře (`.github`, `.gitignore`) na webu nejsou. Co se nezveřejňuje, je v úloze v seznamu `VYNECHAT`; nový soubor, který na web nepatří, je potřeba do seznamu doplnit.
+
 1. V repozitáři otevřete **Settings → Pages**.
-2. V části **Build and deployment** zvolte **Source: Deploy from a branch**, vyberte větev s webem a složku **/ (root)**.
-3. Web je hned k vyzkoušení na https://frantisekholas.github.io/web-holasovi-net/
-4. Až bude nastavené DNS (níže), zadejte do **Custom domain** `holasovi.net` a uložte. GitHub tím do větve přidá soubor `CNAME`.
-5. Jakmile GitHub ověří DNS, zapněte **Enforce HTTPS**.
+2. V části **Build and deployment** zvolte **Source: GitHub Actions**.
+3. Až bude nastavené DNS (níže), zadejte do **Custom domain** `holasovi.net` a uložte (soubor `CNAME` v repozitáři je jen pro přehled).
+4. Jakmile GitHub ověří DNS, zapněte **Enforce HTTPS**.
 
 GitHub Pages zdarma vyžaduje veřejný repozitář.
 
