@@ -57,11 +57,12 @@ CINNOST_FRANTISEK = {
         {
             'nadpis': ('Tiskové formuláře', 'Print forms', 'Druckformulare'),
             'popis': (
-                'Specialista na tisk s&nbsp;hlubokou znalostí Adobe PDF Forms.',
-                'Print specialist with deep knowledge of Adobe PDF Forms.',
-                'Druckspezialist mit fundierten Kenntnissen von Adobe PDF Forms.',
+                'Specialista na tisk s&nbsp;hlubokou znalostí Adobe PDF Forms, včetně archivace a elektronického podepisování.',
+                'Print specialist with deep knowledge of Adobe PDF Forms, including archiving and electronic signing.',
+                'Druckspezialist mit fundierten Kenntnissen von Adobe PDF Forms, einschließlich Archivierung und elektronischer Signatur.',
             ),
-            'stitky': ['Adobe PDF Forms'],
+            'stitky': ['Adobe PDF Forms', ('Archivace', 'Archiving', 'Archivierung'),
+                       ('Elektronický podpis', 'Electronic signature', 'Elektronische Signatur')],
         },
         {
             'nadpis': ('Integrace', 'Integration', 'Integration'),
