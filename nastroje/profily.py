@@ -26,7 +26,8 @@ DATOVKY = 'https://www.datovka.gov.cz/sds/detail?dbid={id}'
 MAPY = 'https://www.google.com/maps/search/?api=1&query=Slez%C3%A1kova%20999%2F25%2C%20613%2000%20Brno'
 
 # ---------- Čím se zabývá (místo předmětu podnikání z rejstříku) ----------
-# Podle profilu na LinkedIn. Každá oblast: nadpis, popis (cs, en, de) a štítky s technologiemi.
+# Podle profilu na LinkedIn. Každá oblast: nadpis, popis (cs, en, de) a štítky s technologiemi
+# (štítek je text, nebo trojice (cs, en, de), když se v jazycích liší).
 CINNOST_FRANTISEK = {
     'nadpis': ('Čím se zabývám', 'What I do', 'Was ich mache'),
     'uvod': (
@@ -78,7 +79,8 @@ CINNOST_FRANTISEK = {
                 'Strong experience with various integration scenarios: Jungheinrich VNA/LRK/PRK, Kardex VNA, the Czech national standard for ESSL/ISSD, EET&nbsp;2.0 (Czech electronic sales records), Czech and EU public registers (ADIS, ISIR, VIES), public web services and custom solutions for various problems.',
                 'Umfangreiche Erfahrung mit verschiedenen Integrationsszenarien: Jungheinrich VNA/LRK/PRK, Kardex VNA, tschechischer nationaler Standard für ESSL/ISSD, EET&nbsp;2.0 (tschechische elektronische Umsatzerfassung), tschechische und EU-Register (ADIS, ISIR, VIES), öffentliche Webservices und eigene Lösungen für verschiedenste Aufgaben.',
             ),
-            'stitky': ['Jungheinrich VNA/LRK/PRK', 'Kardex VNA', 'ESSL/ISSD', 'EET 2.0', 'ADIS', 'ISIR', 'VIES'],
+            'stitky': ['Jungheinrich VNA/LRK/PRK', 'Kardex VNA', 'ESSL/ISSD', 'EET 2.0',
+                       ('Veřejné rejstříky ADIS/ISIR/VIES', 'Public registers ADIS/ISIR/VIES', 'Öffentliche Register ADIS/ISIR/VIES')],
         },
         {
             'nadpis': ('Komplexní aplikace', 'Complex applications', 'Komplexe Anwendungen'),
@@ -331,6 +333,11 @@ def nbsp(text):
     return text.replace(' ', '&nbsp;')
 
 
+def stitek(st, ji):
+    """Štítek technologie: společný text, nebo trojice (cs, en, de)."""
+    return st[ji] if isinstance(st, tuple) else st
+
+
 def rod(hodnota, osoba):
     """Text podle rodu: dvojice (muž, žena) nebo jeden společný text."""
     if isinstance(hodnota, tuple):
@@ -389,7 +396,7 @@ def stranka(o, jazyk):
             f'''          <div class="card oblast">
             <h3>{ob["nadpis"][ji]}</h3>
             <p>{ob["popis"][ji]}</p>
-            {('<ul class="stitky">' + "".join(f"<li>{st}</li>" for st in ob["stitky"]) + '</ul>') if ob["stitky"] else ''}
+            {('<ul class="stitky">' + "".join(f"<li>{stitek(st, ji)}</li>" for st in ob["stitky"]) + '</ul>') if ob["stitky"] else ''}
           </div>''' for ob in cinnost['oblasti'])
         cinnost_html = f'''
     <section class="{tridy.pop(0)}" id="cinnost" aria-labelledby="cinnost-h">
@@ -464,7 +471,7 @@ def stranka(o, jazyk):
     if o['titul']:
         ld['honorificPrefix'] = o['titul']
     if cinnost and any(ob['stitky'] for ob in cinnost['oblasti']):
-        ld['knowsAbout'] = sorted({st for ob in cinnost['oblasti'] for st in ob['stitky']})
+        ld['knowsAbout'] = sorted({stitek(st, ji) for ob in cinnost['oblasti'] for st in ob['stitky']})
     if o['telefon']:
         ld['telephone'] = o['telefon'].replace(' ', '')
     ld = json.dumps(ld, ensure_ascii=False, indent=2).replace('\n', '\n  ')
