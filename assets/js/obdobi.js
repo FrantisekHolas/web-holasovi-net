@@ -101,14 +101,22 @@
     return odhad;
   }
 
-  // Text termínu ('24. 12.' nebo 'Velikonoce -3') → měsíc * 100 + den v daném roce.
+  // První adventní neděle → [měsíc, den]: čtvrtá neděle před Božím hodem (27. 11. – 3. 12.).
+  function prvniAdventniNedele(rok) {
+    var stedryDen = new Date(Date.UTC(rok, 11, 24));
+    var ctvrta = 24 - stedryDen.getUTCDay();          // neděle 18. – 24. 12.
+    var d = new Date(Date.UTC(rok, 11, ctvrta - 21));
+    return [d.getUTCMonth() + 1, d.getUTCDate()];
+  }
+
+  // Text termínu ('24. 12.', 'Velikonoce -3' nebo 'Advent') → měsíc * 100 + den v daném roce.
   function klicTerminu(text, rok) {
     var m = /^\s*(\d{1,2})\s*\.\s*(\d{1,2})\s*\.?\s*$/.exec(text);
     if (m) return +m[2] * 100 + +m[1];
-    m = /^\s*velikonoce\s*(?:([+-])\s*(\d+))?\s*$/i.exec(text);
+    m = /^\s*(velikonoce|advent)\s*(?:([+-])\s*(\d+))?\s*$/i.exec(text);
     if (m) {
-      var v = velikonocniNedele(rok);
-      var posun = m[2] ? (m[1] === '-' ? -1 : 1) * +m[2] : 0;
+      var v = m[1].toLowerCase() === 'advent' ? prvniAdventniNedele(rok) : velikonocniNedele(rok);
+      var posun = m[3] ? (m[2] === '-' ? -1 : 1) * +m[3] : 0;
       var d = new Date(Date.UTC(rok, v[0] - 1, v[1] + posun));
       return (d.getUTCMonth() + 1) * 100 + d.getUTCDate();
     }
@@ -222,6 +230,7 @@
     zacatekObdobi: zacatekObdobi,
     rocniObdobi: rocniObdobi,
     velikonocniNedele: velikonocniNedele,
+    prvniAdventniNedele: prvniAdventniNedele,
     casVPraze: casVPraze,
     casZPrahy: casZPrahy,
     vyberMotiv: vyberMotiv,

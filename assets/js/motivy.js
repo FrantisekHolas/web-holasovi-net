@@ -5,8 +5,10 @@
   Roční období se střídají astronomicky, v okamžiku rovnodennosti a slunovratu
   (jaro kolem 20. 3., léto kolem 21. 6., podzim kolem 23. 9., zima kolem 21. 12.).
   Svátky mají přednost před ročním obdobím a platí celé dny podle českého času.
-  Termín svátku: 'den. měsíc.' (např. '24. 12.') nebo 'Velikonoce' s posunem ve dnech
-  od Velikonoční neděle (např. 'Velikonoce -3' = Zelený čtvrtek).
+  Termín svátku: 'den. měsíc.' (např. '24. 12.'), 'Velikonoce' s posunem ve dnech
+  od Velikonoční neděle (např. 'Velikonoce -3' = Zelený čtvrtek) nebo 'Advent'
+  (1. adventní neděle, případně s posunem ve dnech, např. 'Advent +7').
+  Vánoce platí od 1. adventní neděle do 30. 12., pak přijde Silvestr.
 
   Malby motivu jsou ve složce assets/img/motivy/<id>/ a do pole "obrazky" se zapíše,
   které verze má (všechny ve stejném výřezu a rozměrech jako podzim):
@@ -41,7 +43,7 @@ window.HOLASOVI.motivy = {
   },
 
   svatky: [
-    { id: 'vanoce',     nazev: 'Vánoce',              od: '24. 12.',        do: '26. 12.',       obrazky: ['ctverec', 'vyska', 'panorama'], noc: 'malba' },
+    { id: 'vanoce',     nazev: 'Vánoce',              od: 'Advent',         do: '30. 12.',       obrazky: ['ctverec', 'vyska', 'panorama'], noc: 'malba' },
     { id: 'silvestr',   nazev: 'Silvestr a Nový rok', od: '31. 12.',        do: '1. 1.',         obrazky: [], efekt: 'ohnostroj', noc: 'vzdy' },
     { id: 'velikonoce', nazev: 'Velikonoce',          od: 'Velikonoce -3',  do: 'Velikonoce +1', obrazky: [] }
   ]
