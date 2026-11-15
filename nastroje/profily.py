@@ -28,7 +28,8 @@ MAPY = 'https://www.google.com/maps/search/?api=1&query=Slez%C3%A1kova%20999%2F2
 
 # ---------- Čím se zabývá (místo předmětu podnikání z rejstříku) ----------
 # Podle profilu na LinkedIn. Každá oblast: nadpis, popis (cs, en, de) a štítky s technologiemi
-# (štítek je text, nebo trojice (cs, en, de), když se v jazycích liší; 'abecedne': True je seřadí).
+# (štítek je text, nebo trojice (cs, en, de), když se v jazycích liší; 'abecedne': True je seřadí,
+# 'zvyraznit': [...] štítky zvýrazní).
 CINNOST_FRANTISEK = {
     'nadpis': ('Čím se zabývám', 'What I do', 'Was ich mache'),
     'uvod': (
@@ -119,11 +120,12 @@ CINNOST_VERA = {
         {
             'nadpis': ('Tisková řešení', 'Print solutions', 'Drucklösungen'),
             'popis': (
-                'Tisková řešení v&nbsp;SAP: formuláře a tiskové výstupy.',
-                'Print solutions in SAP: forms and print output.',
-                'Drucklösungen in SAP: Formulare und Druckausgaben.',
+                'Tisková řešení v&nbsp;SAP: formuláře a tiskové výstupy v&nbsp;technologiích SAPscript, SmartForms a zejména SAP PDF Forms.',
+                'Print solutions in SAP: forms and print output using SAPscript, SmartForms and especially SAP PDF Forms.',
+                'Drucklösungen in SAP: Formulare und Druckausgaben mit SAPscript, SmartForms und vor allem SAP PDF Forms.',
             ),
-            'stitky': [],
+            'stitky': ['SAP PDF Forms', 'SmartForms', 'SAPscript'],
+            'zvyraznit': ['SAP PDF Forms'],
         },
         {
             'nadpis': ('Překlady a rebranding formulářů', 'Form translation and rebranding', 'Übersetzung und Rebranding von Formularen'),
@@ -418,7 +420,7 @@ def stranka(o, jazyk):
             f'''          <div class="card oblast">
             <h3>{ob["nadpis"][ji]}</h3>
             <p>{ob["popis"][ji]}</p>
-            {('<ul class="stitky">' + "".join(f"<li>{st}</li>" for st in stitky_oblasti(ob, ji)) + '</ul>') if ob["stitky"] else ''}
+            {('<ul class="stitky">' + "".join(f'<li class="hlavni">{st}</li>' if st in ob.get("zvyraznit", []) else f"<li>{st}</li>" for st in stitky_oblasti(ob, ji)) + '</ul>') if ob["stitky"] else ''}
           </div>''' for ob in cinnost['oblasti'])
         cinnost_html = f'''
     <section class="{tridy.pop(0)}" id="cinnost" aria-labelledby="cinnost-h">
