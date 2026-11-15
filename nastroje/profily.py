@@ -93,9 +93,9 @@ CINNOST_FRANTISEK = {
         {
             'nadpis': ('Komplexní aplikace', 'Complex applications', 'Komplexe Anwendungen'),
             'popis': (
-                'Návrh a realizace komplexních aplikací: workflow, tisková řešení, e-shop, automatizace procesů, uživatelské kokpity, národní standard pro elektronický systém spisové služby eSSL/ISSD, EET&nbsp;2.0, veřejné rejstříky ADIS/ISIR/VIES a mnoho dalšího.',
-                'Design and implementation of complex applications: workflows, print solutions, e-shop, process automation, user cockpits, the Czech national standard for electronic records management systems eSSL/ISSD, EET&nbsp;2.0 (Czech electronic sales records), Czech and EU public registers ADIS/ISIR/VIES and many others.',
-                'Konzeption und Umsetzung komplexer Anwendungen: Workflows, Drucklösungen, E-Shop, Prozessautomatisierung, Benutzer-Cockpits, tschechischer nationaler Standard für elektronische Aktenverwaltungssysteme eSSL/ISSD, EET&nbsp;2.0 (tschechische elektronische Umsatzerfassung), tschechische und EU-Register ADIS/ISIR/VIES und vieles mehr.',
+                'Návrh a realizace komplexních aplikací: workflow, tisková řešení, e&#8209;shop, automatizace procesů, uživatelské kokpity, národní standard pro elektronický systém spisové služby eSSL/ISSD, EET&nbsp;2.0, veřejné rejstříky ADIS/ISIR/VIES a mnoho dalšího.',
+                'Design and implementation of complex applications: workflows, print solutions, e&#8209;shop, process automation, user cockpits, the Czech national standard for electronic records management systems eSSL/ISSD, EET&nbsp;2.0 (Czech electronic sales records), Czech and EU public registers ADIS/ISIR/VIES and many others.',
+                'Konzeption und Umsetzung komplexer Anwendungen: Workflows, Drucklösungen, E&#8209;Shop, Prozessautomatisierung, Benutzer-Cockpits, tschechischer nationaler Standard für elektronische Aktenverwaltungssysteme eSSL/ISSD, EET&nbsp;2.0 (tschechische elektronische Umsatzerfassung), tschechische und EU-Register ADIS/ISIR/VIES und vieles mehr.',
             ),
             'stitky': ['Workflow', 'EET 2.0', ('Spisová služba', 'Records management', 'Aktenverwaltung'),
                        ('Tisková řešení', 'Print solutions', 'Drucklösungen'),
