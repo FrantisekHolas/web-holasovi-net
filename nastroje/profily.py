@@ -79,7 +79,8 @@ CINNOST_FRANTISEK = {
                 'Strong experience with various integration scenarios: Jungheinrich VNA/LRK/PRK, Kardex VNA, the Czech national standard for ESSL/ISSD, EET&nbsp;2.0 (Czech electronic sales records), Czech and EU public registers (ADIS, ISIR, VIES), public web services and custom solutions for various problems.',
                 'Umfangreiche Erfahrung mit verschiedenen Integrationsszenarien: Jungheinrich VNA/LRK/PRK, Kardex VNA, tschechischer nationaler Standard für ESSL/ISSD, EET&nbsp;2.0 (tschechische elektronische Umsatzerfassung), tschechische und EU-Register (ADIS, ISIR, VIES), öffentliche Webservices und eigene Lösungen für verschiedenste Aufgaben.',
             ),
-            'stitky': ['Jungheinrich VNA/LRK/PRK', 'Kardex VNA', 'ESSL/ISSD', 'EET 2.0',
+            # abecedně (ve všech třech jazycích stejné pořadí)
+            'stitky': ['EET 2.0', 'ESSL/ISSD', 'Jungheinrich VNA/LRK/PRK', 'Kardex VNA',
                        ('Veřejné rejstříky ADIS/ISIR/VIES', 'Public registers ADIS/ISIR/VIES', 'Öffentliche Register ADIS/ISIR/VIES')],
         },
         {
