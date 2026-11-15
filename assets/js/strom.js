@@ -24,13 +24,14 @@
 
   if (!platno) return;
 
-  function inicialaSvg(pismeno, natoceni) {
+  // posun = vodorovný posun písmene v procentech šířky lístku (záporný doleva)
+  function inicialaSvg(pismeno, natoceni, posun) {
     var svg = document.createElementNS(SVG, 'svg');
     svg.setAttribute('viewBox', '0 0 100 100');
     svg.setAttribute('aria-hidden', 'true');
     svg.setAttribute('focusable', 'false');
     var text = document.createElementNS(SVG, 'text');
-    text.setAttribute('x', '50');
+    text.setAttribute('x', String(50 + (Number(posun) || 0)));
     text.setAttribute('y', '52');
     text.setAttribute('text-anchor', 'middle');
     text.setAttribute('dominant-baseline', 'central');
@@ -83,7 +84,7 @@
     if (data.motiv && data.motiv.ctverecMaly) kartaListek.style.backgroundImage = 'url("' + data.motiv.ctverecMaly + '")';
     kartaListek.style.backgroundSize = (900 * meritko) + 'px';
     kartaListek.style.backgroundPosition = (-(x - 60) * meritko) + 'px ' + (-(y - 60) * meritko) + 'px';
-    kartaListek.replaceChildren(inicialaSvg(clen.inicial, 0));
+    kartaListek.replaceChildren(inicialaSvg(clen.inicial, 0, clen.posunPismene));
 
     kartaOdkazy.replaceChildren();
     var polozky = polozkyKarty(clen);
@@ -137,7 +138,7 @@
     el.setAttribute('aria-label', clen.jmeno + ' – zobrazit kontakt');
     nastavPolohu(el, clen.poloha);
     el.style.setProperty('--zare', clen.zare);
-    el.appendChild(inicialaSvg(clen.inicial, clen.natoceni));
+    el.appendChild(inicialaSvg(clen.inicial, clen.natoceni, clen.posunPismene));
 
     var jmeno = document.createElement('span');
     jmeno.className = 'listek__jmeno';

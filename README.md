@@ -55,7 +55,7 @@ Malba stromu se mění podle ročního období a svátků, podobně jako sváte�
 |---|---|---|
 | jaro, léto, podzim, zima | astronomicky, od okamžiku rovnodennosti nebo slunovratu (kolem 20. 3., 21. 6., 23. 9. a 21. 12.) | všechna čtyři |
 | Vánoce | od 1. adventní neděle do 30. 12. | ano (noční malba, v noci se už neztmavuje) |
-| Silvestr a Nový rok | 31. 12.–1. 1., s ohňostrojem | zatím není (použije se zima v nočním režimu) |
+| Silvestr a Nový rok | 31. 12.–1. 1., s ohňostrojem | vlastní není, použije se zima v nočním režimu |
 | Velikonoce | Zelený čtvrtek – Velikonoční pondělí | ano (vajíčka, stužky a zajíci) |
 
 Svátky mají přednost před ročním obdobím. Rozhoduje datum a čas v Česku. Dokud motiv nemá vlastní malbu, použije se malba ročního období a nakonec podzim.

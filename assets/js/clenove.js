@@ -22,6 +22,9 @@
     vyska    = vyska.webp    (mobily a tablety na výšku)
     panorama = panorama.webp (ultraširoké monitory a mobily na šířku)
   Polohy měňte jen tehdy, když se vymění celá malba.
+
+  Písmeno je uprostřed lístku. Má-li písmeno nesouměrný tvar (např. L s dlouhou patkou),
+  lze ho posunout: posunPismene = vodorovný posun v procentech šířky lístku, záporný doleva.
 */
 window.HOLASOVI = {
   clenove: [
@@ -63,6 +66,7 @@ window.HOLASOVI = {
       inicial: 'L',
       listek: 'zelený',
       natoceni: 8,
+      posunPismene: -12,
       zare: 'rgba(190, 240, 140, 0.75)',
       poloha: { ctverec: [31.4, 43.2], vyska: [30.82, 38.15], panorama: [44.65, 42.55] },
       kontakty: [
