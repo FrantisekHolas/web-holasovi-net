@@ -92,7 +92,7 @@ CINNOST_FRANTISEK = {
                 'Konzeption und Umsetzung komplexer Anwendungen: Workflows, tschechischer nationaler Standard für elektronische Aktenverwaltungssysteme eSSL/ISSD, EET&nbsp;2.0 (tschechische elektronische Umsatzerfassung), tschechische und EU-Register ADIS/ISIR/VIES und vieles mehr.',
             ),
             'stitky': ['Workflow', 'EET 2.0', ('Spisová služba', 'Records management', 'Aktenverwaltung'),
-                       ('Veřejné rejstříky ADIS/ISIR/VIES', 'Public registers ADIS/ISIR/VIES', 'Öffentliche Register ADIS/ISIR/VIES')],
+                       ('Veřejné rejstříky', 'Public registers', 'Öffentliche Register')],
             'abecedne': True,
         },
     ],
