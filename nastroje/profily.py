@@ -65,20 +65,20 @@ CINNOST_FRANTISEK = {
         {
             'nadpis': ('Integrace', 'Integration', 'Integration'),
             'popis': (
-                'Propojení SAP s&nbsp;dalšími systémy i&nbsp;veřejnými rejstříky (ADIS, ISIR, VIES) a podpora mnoha datových formátů.',
-                'Connecting SAP with other systems and Czech and EU public registers (ADIS, ISIR, VIES), support for many data formats.',
-                'Anbindung von SAP an andere Systeme und an tschechische und EU-Register (ADIS, ISIR, VIES), Unterstützung vieler Datenformate.',
+                'Propojení SAP s&nbsp;dalšími systémy a podpora mnoha datových formátů.',
+                'Connecting SAP with other systems and support for many data formats.',
+                'Anbindung von SAP an andere Systeme und Unterstützung vieler Datenformate.',
             ),
-            'stitky': ['RFC', 'SAP Proxy', 'IDoc', 'REST', 'SOAP', 'OData', 'ADIS', 'ISIR', 'VIES', 'XML', 'JSON', 'EDI', 'XLS', 'XLSX'],
+            'stitky': ['RFC', 'SAP Proxy', 'IDoc', 'REST', 'SOAP', 'OData', 'XML', 'JSON', 'EDI', 'XLS', 'XLSX'],
         },
         {
             'nadpis': ('Integrační scénáře', 'Integration scenarios', 'Integrationsszenarien'),
             'popis': (
-                'Bohaté zkušenosti s&nbsp;různými scénáři: Jungheinrich VNA/LRK/PRK, národní standard pro ESSL/ISSD, EET&nbsp;2.0, veřejné rejstříky, veřejné webové služby a vlastní řešení nejrůznějších problémů.',
-                'Strong experience with various integration scenarios: Jungheinrich VNA/LRK/PRK, the Czech national standard for ESSL/ISSD, EET&nbsp;2.0 (Czech electronic sales records), public registers, public web services and custom solutions for various problems.',
-                'Umfangreiche Erfahrung mit verschiedenen Integrationsszenarien: Jungheinrich VNA/LRK/PRK, tschechischer nationaler Standard für ESSL/ISSD, EET&nbsp;2.0 (tschechische elektronische Umsatzerfassung), öffentliche Register, öffentliche Webservices und eigene Lösungen für verschiedenste Aufgaben.',
+                'Bohaté zkušenosti s&nbsp;různými scénáři: Jungheinrich VNA/LRK/PRK, národní standard pro ESSL/ISSD, EET&nbsp;2.0, veřejné rejstříky (ADIS, ISIR, VIES), veřejné webové služby a vlastní řešení nejrůznějších problémů.',
+                'Strong experience with various integration scenarios: Jungheinrich VNA/LRK/PRK, the Czech national standard for ESSL/ISSD, EET&nbsp;2.0 (Czech electronic sales records), Czech and EU public registers (ADIS, ISIR, VIES), public web services and custom solutions for various problems.',
+                'Umfangreiche Erfahrung mit verschiedenen Integrationsszenarien: Jungheinrich VNA/LRK/PRK, tschechischer nationaler Standard für ESSL/ISSD, EET&nbsp;2.0 (tschechische elektronische Umsatzerfassung), tschechische und EU-Register (ADIS, ISIR, VIES), öffentliche Webservices und eigene Lösungen für verschiedenste Aufgaben.',
             ),
-            'stitky': ['Jungheinrich VNA/LRK/PRK', 'ESSL/ISSD', 'EET 2.0'],
+            'stitky': ['Jungheinrich VNA/LRK/PRK', 'ESSL/ISSD', 'EET 2.0', 'ADIS', 'ISIR', 'VIES'],
         },
         {
             'nadpis': ('Komplexní aplikace', 'Complex applications', 'Komplexe Anwendungen'),
