@@ -37,7 +37,7 @@ Na kartách Františka a Věrky je odkaz **Podnikatelský profil**:
 | František | https://holasovi.net/frantisek-profil-88722520/ |
 | Věrka | https://holasovi.net/vera-profil-06635971/ |
 
-Každý profil je česky, anglicky (`en/`) a německy (`de/`). Obsahuje údaje podle vzoru conceptual.cz: IČO, DIČ, plátcovství DPH, právní formu, místo a předmět podnikání (u Františka místo něj sekce „Čím se zabývám“ podle profilu na LinkedIn), správce daně, bankovní účty zveřejněné v registru plátců DPH a kontakt včetně datové schránky, s odkazy do živnostenského rejstříku (RŽP), registru plátců DPH (ADIS), systému VIES a registru datových schránek.
+Každý profil je česky, anglicky (`en/`) a německy (`de/`). Obsahuje údaje podle vzoru conceptual.cz: IČO, DIČ, plátcovství DPH, právní formu, místo a předmět podnikání (místo něj je sekce „Čím se zabývám“, u Františka podle profilu na LinkedIn), správce daně, bankovní účty zveřejněné v registru plátců DPH a kontakt včetně datové schránky, s odkazy do živnostenského rejstříku (RŽP), registru plátců DPH (ADIS), systému VIES a registru datových schránek.
 
 - Stránky nemají logo a jsou černobílé. Světlý nebo tmavý režim se řídí prohlížečem, přepínač v záhlaví volbu změní a zapamatuje.
 - Česká stránka pošle návštěvníka s anglickým nebo německým prohlížečem na jeho jazyk. Ruční volba jazyka se zapamatuje.

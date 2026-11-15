@@ -92,6 +92,44 @@ CINNOST_FRANTISEK = {
     ],
 }
 
+CINNOST_VERA = {
+    'nadpis': ('Čím se zabývám', 'What I do', 'Was ich mache'),
+    'uvod': (
+        'Tisková řešení a formuláře v&nbsp;SAP a vývoj v&nbsp;ABAP.',
+        'Print solutions and forms in SAP, and ABAP development.',
+        'Drucklösungen und Formulare in SAP sowie ABAP-Entwicklung.',
+    ),
+    'oblasti': [
+        {
+            'nadpis': ('Tisková řešení', 'Print solutions', 'Drucklösungen'),
+            'popis': (
+                'Tisková řešení v&nbsp;SAP: formuláře a tiskové výstupy.',
+                'Print solutions in SAP: forms and print output.',
+                'Drucklösungen in SAP: Formulare und Druckausgaben.',
+            ),
+            'stitky': [],
+        },
+        {
+            'nadpis': ('Překlady a rebranding formulářů', 'Form translation and rebranding', 'Übersetzung und Rebranding von Formularen'),
+            'popis': (
+                'Podpora překladů formulářů do dalších jazyků a jejich rebrandingu, například po změně firemní identity.',
+                'Support for translating forms into other languages and for rebranding them, for example after a change of corporate identity.',
+                'Unterstützung bei der Übersetzung von Formularen in weitere Sprachen und bei ihrem Rebranding, zum Beispiel nach einer Änderung des Corporate Designs.',
+            ),
+            'stitky': [],
+        },
+        {
+            'nadpis': ('Vývoj v&nbsp;SAP ABAP', 'SAP ABAP development', 'SAP-ABAP-Entwicklung'),
+            'popis': (
+                'Vývoj jednoduchých i&nbsp;složitějších řešení na míru.',
+                'Development of simple as well as more complex custom solutions.',
+                'Entwicklung einfacher wie auch komplexerer individueller Lösungen.',
+            ),
+            'stitky': [],
+        },
+    ],
+}
+
 # ---------- Osoby (údaje z rejstříků) ----------
 OSOBY = [
     {
@@ -118,7 +156,9 @@ OSOBY = [
         'od': '2017-11-27', 'dph_od': '2019-09-01',
         'ulice': 'Slezákova 999/25', 'cast': 'Husovice', 'psc': '613 00', 'mesto': 'Brno', 'mapy': MAPY,
         'email': 'info@vera.holasovi.net', 'telefon': None, 'datovka': 'hfgwcpe',
+        # obory z rejstříku se na stránce nezobrazují, místo nich je sekce „Čím se zabývám“ (cinnost)
         'obory': ['zprostredkovani', 'poradenstvi', 'reklama', 'obchod', 'jinde', 'software', 'vyzkum'],
+        'cinnost': CINNOST_VERA,
         'ucty': [
             ('2701334897/2010', 'CZ73 2010 0000 0027 0133 4897', 'Fio banka, a.s.', 'FIOBCZPP', '2019-11-14', None),
         ],
@@ -172,7 +212,7 @@ T = {
         'eyebrow': 'Brno, Česká republika · od roku {rok}',
         'lead': 'Podnikající fyzická osoba zapsaná v&nbsp;živnostenském rejstříku, plátce DPH.',
         'btn_vypis': 'Výpis ze živnostenského rejstříku',
-        'h_udaje': 'Údaje o&nbsp;podnikateli',
+        'h_udaje': ('Údaje o&nbsp;podnikateli', 'Údaje o&nbsp;podnikatelce'),
         'jmeno': 'Obchodní jméno', 'ico': 'IČO', 'ico_kratce': 'IČO', 'rzp': 'Živnostenský rejstřík', 'dic': 'DIČ',
         'adis': 'Registr plátců DPH (ADIS)', 'vies': 'Ověření ve VIES (EU)',
         'dic_pozn': 'V&nbsp;ADIS i&nbsp;VIES zadejte číslo {cislo} (ve VIES členský stát CZ).',
@@ -349,7 +389,7 @@ def stranka(o, jazyk):
             f'''          <div class="card oblast">
             <h3>{ob["nadpis"][ji]}</h3>
             <p>{ob["popis"][ji]}</p>
-            <ul class="stitky">{"".join(f"<li>{st}</li>" for st in ob["stitky"])}</ul>
+            {('<ul class="stitky">' + "".join(f"<li>{st}</li>" for st in ob["stitky"]) + '</ul>') if ob["stitky"] else ''}
           </div>''' for ob in cinnost['oblasti'])
         cinnost_html = f'''
     <section class="{tridy.pop(0)}" id="cinnost" aria-labelledby="cinnost-h">
@@ -423,7 +463,7 @@ def stranka(o, jazyk):
     }
     if o['titul']:
         ld['honorificPrefix'] = o['titul']
-    if cinnost:
+    if cinnost and any(ob['stitky'] for ob in cinnost['oblasti']):
         ld['knowsAbout'] = sorted({st for ob in cinnost['oblasti'] for st in ob['stitky']})
     if o['telefon']:
         ld['telephone'] = o['telefon'].replace(' ', '')
