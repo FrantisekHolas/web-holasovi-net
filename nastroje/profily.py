@@ -74,11 +74,11 @@ CINNOST_FRANTISEK = {
         {
             'nadpis': ('Integrační scénáře', 'Integration scenarios', 'Integrationsszenarien'),
             'popis': (
-                'Bohaté zkušenosti s&nbsp;různými scénáři: Jungheinrich VNA/LRK/PRK, národní standard pro ESSL/ISSD, veřejné webové služby a vlastní řešení nejrůznějších problémů.',
-                'Strong experience with various integration scenarios: Jungheinrich VNA/LRK/PRK, the Czech national standard for ESSL/ISSD, public web services and custom solutions for various problems.',
-                'Umfangreiche Erfahrung mit verschiedenen Integrationsszenarien: Jungheinrich VNA/LRK/PRK, tschechischer nationaler Standard für ESSL/ISSD, öffentliche Webservices und eigene Lösungen für verschiedenste Aufgaben.',
+                'Bohaté zkušenosti s&nbsp;různými scénáři: Jungheinrich VNA/LRK/PRK, národní standard pro ESSL/ISSD, EET&nbsp;2.0, veřejné rejstříky, veřejné webové služby a vlastní řešení nejrůznějších problémů.',
+                'Strong experience with various integration scenarios: Jungheinrich VNA/LRK/PRK, the Czech national standard for ESSL/ISSD, EET&nbsp;2.0 (Czech electronic sales records), public registers, public web services and custom solutions for various problems.',
+                'Umfangreiche Erfahrung mit verschiedenen Integrationsszenarien: Jungheinrich VNA/LRK/PRK, tschechischer nationaler Standard für ESSL/ISSD, EET&nbsp;2.0 (tschechische elektronische Umsatzerfassung), öffentliche Register, öffentliche Webservices und eigene Lösungen für verschiedenste Aufgaben.',
             ),
-            'stitky': ['Jungheinrich VNA/LRK/PRK', 'ESSL/ISSD'],
+            'stitky': ['Jungheinrich VNA/LRK/PRK', 'ESSL/ISSD', 'EET 2.0'],
         },
         {
             'nadpis': ('Komplexní aplikace', 'Complex applications', 'Komplexe Anwendungen'),
