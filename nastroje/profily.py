@@ -25,6 +25,73 @@ VIES = 'https://ec.europa.eu/taxation_customs/vies/#/vat-validation'
 DATOVKY = 'https://www.datovka.gov.cz/sds/detail?dbid={id}'
 MAPY = 'https://www.google.com/maps/search/?api=1&query=Slez%C3%A1kova%20999%2F25%2C%20613%2000%20Brno'
 
+# ---------- Čím se zabývá (místo předmětu podnikání z rejstříku) ----------
+# Podle profilu na LinkedIn. Každá oblast: nadpis, popis (cs, en, de) a štítky s technologiemi.
+CINNOST_FRANTISEK = {
+    'nadpis': ('Čím se zabývám', 'What I do', 'Was ich mache'),
+    'uvod': (
+        'Komplexní řešení pro zákazníky v&nbsp;SAP – návrh architektury, vývoj, customizing, optimalizace, podpora a řešení nejrůznějších problémů.',
+        'Complex customer solutions in SAP – architecture, development, customizing, optimization, support and the ability to solve all kinds of problems.',
+        'Komplexe Kundenlösungen in SAP – Architektur, Entwicklung, Customizing, Optimierung, Support und die Lösung verschiedenster Probleme.',
+    ),
+    'oblasti': [
+        {
+            'nadpis': ('Vývoj v&nbsp;ABAP', 'ABAP development', 'ABAP-Entwicklung'),
+            'popis': (
+                'Procedurální i objektový přístup, modelování v&nbsp;HANA, enhancementy a modifikace, dynpra, reporty a vlastní komplexní řešení.',
+                'Procedural and object-oriented programming, HANA modelling, enhancements and modifications, dynpros, reports and custom complex solutions.',
+                'Prozedurale und objektorientierte Entwicklung, HANA-Modellierung, Erweiterungen und Modifikationen, Dynpros, Reports und eigene komplexe Lösungen.',
+            ),
+            'stitky': ['ABAP OO', 'HANA DB', 'S/4HANA', 'BOPF', 'BRF+', 'ALV', 'SALV', 'BDC'],
+        },
+        {
+            'nadpis': ('Vývoj v&nbsp;SAP Fiori', 'SAP Fiori development', 'SAP-Fiori-Entwicklung'),
+            'popis': (
+                'Aplikace v&nbsp;SAPUI5 a Fiori Elements, hybridní aplikace, SAP Build a Fiori Launchpad.',
+                'Apps in SAPUI5 and Fiori Elements, hybrid apps, SAP Build and the Fiori Launchpad.',
+                'Anwendungen in SAPUI5 und Fiori Elements, hybride Apps, SAP Build und das Fiori Launchpad.',
+            ),
+            'stitky': ['SAPUI5', 'Fiori Elements', 'SAP Build', 'Fiori Launchpad'],
+        },
+        {
+            'nadpis': ('Tiskové formuláře', 'Print forms', 'Druckformulare'),
+            'popis': (
+                'Specialista na tisk s&nbsp;hlubokou znalostí Adobe PDF Forms.',
+                'Print specialist with deep knowledge of Adobe PDF Forms.',
+                'Druckspezialist mit fundierten Kenntnissen von Adobe PDF Forms.',
+            ),
+            'stitky': ['Adobe PDF Forms'],
+        },
+        {
+            'nadpis': ('Integrace', 'Integration', 'Integration'),
+            'popis': (
+                'Propojení SAP s&nbsp;dalšími systémy a podpora mnoha datových formátů.',
+                'Connecting SAP with other systems and support for many data formats.',
+                'Anbindung von SAP an andere Systeme und Unterstützung vieler Datenformate.',
+            ),
+            'stitky': ['RFC', 'SAP Proxy', 'IDoc', 'REST', 'SOAP', 'OData', 'XML', 'JSON', 'EDI', 'XLS', 'XLSX'],
+        },
+        {
+            'nadpis': ('Integrační scénáře', 'Integration scenarios', 'Integrationsszenarien'),
+            'popis': (
+                'Bohaté zkušenosti s&nbsp;různými scénáři: Jungheinrich VNA/LRK/PRK, národní standard pro ESSL/ISSD, veřejné webové služby a vlastní řešení nejrůznějších problémů.',
+                'Strong experience with various integration scenarios: Jungheinrich VNA/LRK/PRK, the Czech national standard for ESSL/ISSD, public web services and custom solutions for various problems.',
+                'Umfangreiche Erfahrung mit verschiedenen Integrationsszenarien: Jungheinrich VNA/LRK/PRK, tschechischer nationaler Standard für ESSL/ISSD, öffentliche Webservices und eigene Lösungen für verschiedenste Aufgaben.',
+            ),
+            'stitky': ['Jungheinrich VNA/LRK/PRK', 'ESSL/ISSD'],
+        },
+        {
+            'nadpis': ('Komplexní aplikace', 'Complex applications', 'Komplexe Anwendungen'),
+            'popis': (
+                'Návrh a realizace komplexních aplikací: workflow, vlastní řešení ukládání dat se SAP Fiori a mnoho dalšího.',
+                'Design and implementation of complex applications: workflows, custom storage solutions with SAP Fiori and many others.',
+                'Konzeption und Umsetzung komplexer Anwendungen: Workflows, eigene Speicherlösungen mit SAP Fiori und vieles mehr.',
+            ),
+            'stitky': ['Workflow', 'SAP Fiori'],
+        },
+    ],
+}
+
 # ---------- Osoby (údaje z rejstříků) ----------
 OSOBY = [
     {
@@ -34,7 +101,9 @@ OSOBY = [
         'od': '2012-04-13', 'dph_od': '2013-07-01',
         'ulice': 'Slezákova 999/25', 'cast': 'Husovice', 'psc': '613 00', 'mesto': 'Brno', 'mapy': MAPY,
         'email': 'frantisek@holasovi.net', 'telefon': '+420 776 280 026', 'datovka': 'ymkb6j4',
+        # obory z rejstříku se na stránce nezobrazují, místo nich je sekce „Čím se zabývám“ (cinnost)
         'obory': ['vyzkum', 'zprostredkovani', 'jinde', 'obchod', 'poradenstvi', 'software'],
+        'cinnost': CINNOST_FRANTISEK,
         'ucty': [
             # číslo účtu, IBAN, banka, BIC, zveřejněno v registru plátců DPH
             ('1037342017/3030', 'CZ72 3030 0000 0010 3734 2017', 'Air Bank a.s.', 'AIRACZPP', '2013-06-20'),
@@ -271,6 +340,42 @@ def stranka(o, jazyk):
         for j, zkr, nazev in jazyky)
     alternativy = '\n'.join(f'  <link rel="alternate" hreflang="{j}" href="{adresa}{"" if j == "cs" else j + "/"}">' for j, _, _ in jazyky)
     obory = '\n'.join(f'                <li>{OBORY[ob][PORADI_JAZYKU[jazyk]]}</li>' for ob in o['obory'])
+    ji = PORADI_JAZYKU[jazyk]
+    cinnost = o.get('cinnost')
+    # střídání pozadí oddílů: Čím se zabývám (je-li), Údaje, Bankovní účty, Kontakt
+    tridy = (['block soft', 'block', 'block soft', 'block'] if cinnost else ['block soft', 'block', 'block soft'])
+    if cinnost:
+        oblasti = '\n'.join(
+            f'''          <div class="card oblast">
+            <h3>{ob["nadpis"][ji]}</h3>
+            <p>{ob["popis"][ji]}</p>
+            <ul class="stitky">{"".join(f"<li>{st}</li>" for st in ob["stitky"])}</ul>
+          </div>''' for ob in cinnost['oblasti'])
+        cinnost_html = f'''
+    <section class="{tridy.pop(0)}" id="cinnost" aria-labelledby="cinnost-h">
+      <div class="wrap">
+        <h2 id="cinnost-h">{cinnost["nadpis"][ji]}</h2>
+        <p class="intro">{cinnost["uvod"][ji]}</p>
+        <div class="oblasti">
+{oblasti}
+        </div>
+      </div>
+    </section>
+'''
+        nav_cinnost = f'<a href="#cinnost">{cinnost["nadpis"][ji]}</a>\n          '
+        predmet_html = ''
+    else:
+        cinnost_html = nav_cinnost = ''
+        predmet_html = f'''
+          <div class="fact">
+            <dt>{t["predmet"]}</dt>
+            <dd>{t["predmet_hodnota"]} <span class="note">{t["predmet_pozn"]}</span>
+              <span class="obory-nadpis">{t["obory"]}</span>
+              <ul class="obory">
+{obory}
+              </ul>
+            </dd>
+          </div>'''
 
     ucty = []
     for i, (cislo, iban, banka, bic, zverejneno) in enumerate(o['ucty'], 1):
@@ -318,6 +423,8 @@ def stranka(o, jazyk):
     }
     if o['titul']:
         ld['honorificPrefix'] = o['titul']
+    if cinnost:
+        ld['knowsAbout'] = sorted({st for ob in cinnost['oblasti'] for st in ob['stitky']})
     if o['telefon']:
         ld['telephone'] = o['telefon'].replace(' ', '')
     ld = json.dumps(ld, ensure_ascii=False, indent=2).replace('\n', '\n  ')
@@ -365,7 +472,7 @@ def stranka(o, jazyk):
       <a class="brand" href="#" aria-label="{cele}, {t["zacatek"]}">{jmeno}</a>
       <div class="header-end">
         <nav class="nav" aria-label="{t["nav"]}">
-          <a href="#udaje">{t["nav_udaje"]}</a>
+          {nav_cinnost}<a href="#udaje">{t["nav_udaje"]}</a>
           <a href="#ucty">{t["nav_ucty"] if pocet_uctu > 1 else h_ucty}</a>
           <a href="#kontakt">{t["nav_kontakt"]}</a>
         </nav>
@@ -398,8 +505,8 @@ def stranka(o, jazyk):
         </div>
       </div>
     </section>
-
-    <section class="block soft" id="udaje" aria-labelledby="udaje-h">
+{cinnost_html}
+    <section class="{tridy[0]}" id="udaje" aria-labelledby="udaje-h">
       <div class="wrap">
         <h2 id="udaje-h">{t["h_udaje"]}</h2>
         <dl class="card facts">
@@ -440,16 +547,7 @@ def stranka(o, jazyk):
             <dd><address>{o["ulice"]}, {o["cast"]}<br>{nbsp(o["psc"])} {o["mesto"]}<br><span class="country">{t["stat"]}</span></address>
               <a class="ext map-link" href="{o["mapy"].replace("&", "&amp;")}" target="_blank" rel="noopener">{t["mapy"].format(ext=ext)}</a>
             </dd>
-          </div>
-          <div class="fact">
-            <dt>{t["predmet"]}</dt>
-            <dd>{t["predmet_hodnota"]} <span class="note">{t["predmet_pozn"]}</span>
-              <span class="obory-nadpis">{t["obory"]}</span>
-              <ul class="obory">
-{obory}
-              </ul>
-            </dd>
-          </div>
+          </div>{predmet_html}
           <div class="fact">
             <dt>{t["spravce"]}</dt>
             <dd>{t["spravce_hodnota"]} <span class="note">{t["spravce_pozn"]}</span></dd>
@@ -458,7 +556,7 @@ def stranka(o, jazyk):
       </div>
     </section>
 
-    <section class="block" id="ucty" aria-labelledby="ucty-h">
+    <section class="{tridy[1]}" id="ucty" aria-labelledby="ucty-h">
       <div class="wrap">
         <h2 id="ucty-h">{h_ucty}</h2>
         <p class="intro">{ucty_uvod}</p>
@@ -469,7 +567,7 @@ def stranka(o, jazyk):
       </div>
     </section>
 
-    <section class="block soft" id="kontakt" aria-labelledby="kontakt-h">
+    <section class="{tridy[2]}" id="kontakt" aria-labelledby="kontakt-h">
       <div class="wrap">
         <h2 id="kontakt-h">{t["h_kontakt"]}</h2>
         <div class="card contact">
