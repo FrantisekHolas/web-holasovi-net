@@ -105,9 +105,9 @@ OSOBY = [
         'obory': ['vyzkum', 'zprostredkovani', 'jinde', 'obchod', 'poradenstvi', 'software'],
         'cinnost': CINNOST_FRANTISEK,
         'ucty': [
-            # číslo účtu, IBAN, banka, BIC, zveřejněno v registru plátců DPH
-            ('1037342017/3030', 'CZ72 3030 0000 0010 3734 2017', 'Air Bank a.s.', 'AIRACZPP', '2013-06-20'),
-            ('1037342033/3030', 'CZ28 3030 0000 0010 3734 2033', 'Air Bank a.s.', 'AIRACZPP', '2021-12-10'),
+            # číslo účtu, IBAN, banka, BIC, zveřejněno v registru plátců DPH, měna (None = neuvádět)
+            ('1037342017/3030', 'CZ72 3030 0000 0010 3734 2017', 'Air Bank a.s.', 'AIRACZPP', '2013-06-20', 'CZK'),
+            ('1037342033/3030', 'CZ28 3030 0000 0010 3734 2033', 'Air Bank a.s.', 'AIRACZPP', '2021-12-10', 'EUR'),
         ],
         'zdroj_datum': '2026-11-14',
     },
@@ -120,7 +120,7 @@ OSOBY = [
         'email': 'info@vera.holasovi.net', 'telefon': None, 'datovka': 'hfgwcpe',
         'obory': ['zprostredkovani', 'poradenstvi', 'reklama', 'obchod', 'jinde', 'software', 'vyzkum'],
         'ucty': [
-            ('2701334897/2010', 'CZ73 2010 0000 0027 0133 4897', 'Fio banka, a.s.', 'FIOBCZPP', '2019-11-14'),
+            ('2701334897/2010', 'CZ73 2010 0000 0027 0133 4897', 'Fio banka, a.s.', 'FIOBCZPP', '2019-11-14', None),
         ],
         'zdroj_datum': '2026-11-14',
     },
@@ -185,8 +185,8 @@ T = {
         'spravce': 'Správce daně', 'spravce_hodnota': 'Finanční úřad pro Jihomoravský kraj', 'spravce_pozn': 'Územní pracoviště Brno III',
         'h_ucty': ('Bankovní účty', 'Bankovní účet'),
         'ucty_uvod': ('Účty zveřejněné správcem daně v&nbsp;registru plátců DPH.', 'Účet zveřejněný správcem daně v&nbsp;registru plátců DPH.'),
-        'ucet': 'Účet', 'cislo': 'Číslo účtu', 'banka': 'Banka', 'zverejneno': 'Zveřejněno',
-        'zdroj': 'Podle registru plátců DPH ke dni {d}. Aktuální stav ověříte v&nbsp;<a class="ext" href="{adis}" target="_blank" rel="noopener" hreflang="cs">registru <span class="nowrap">ADIS{ext}</span></a>.',
+        'ucet': 'Účet', 'ucet_mena': 'Účet v&nbsp;{m}', 'cislo': 'Číslo účtu', 'banka': 'Banka', 'zverejneno': 'Zveřejněno',
+        'zdroj': 'Aktuální stav ověříte v&nbsp;<a class="ext" href="{adis}" target="_blank" rel="noopener" hreflang="cs">registru <span class="nowrap">ADIS{ext}</span></a>.',
         'kopirovat': 'Kopírovat', 'zkopirovano': 'Zkopírováno', 'kop_ico': 'Kopírovat IČO', 'kop_dic': 'Kopírovat DIČ',
         'kop_cislo': 'Kopírovat číslo účtu', 'kop_iban': 'Kopírovat IBAN',
         'h_kontakt': 'Kontakt', 'email': 'E-mail', 'telefon': 'Telefon',
@@ -217,8 +217,8 @@ T = {
         'spravce': 'Tax office', 'spravce_hodnota': 'Tax Office for the South Moravian Region', 'spravce_pozn': 'Regional office Brno III (Finanční úřad pro Jihomoravský kraj, Územní pracoviště Brno III)',
         'h_ucty': ('Bank accounts', 'Bank account'),
         'ucty_uvod': ('Accounts published by the tax authority in the Czech VAT payer register.', 'Account published by the tax authority in the Czech VAT payer register.'),
-        'ucet': 'Account', 'cislo': 'Account number', 'banka': 'Bank', 'zverejneno': 'Published',
-        'zdroj': 'According to the Czech VAT payer register as of {d}. Check the current status in the <a class="ext" href="{adis}" target="_blank" rel="noopener" hreflang="cs">ADIS <span class="nowrap">register{ext}</span></a>.',
+        'ucet': 'Account', 'ucet_mena': '{m} account', 'cislo': 'Account number', 'banka': 'Bank', 'zverejneno': 'Published',
+        'zdroj': 'Check the current status in the <a class="ext" href="{adis}" target="_blank" rel="noopener" hreflang="cs">ADIS <span class="nowrap">register{ext}</span></a>.',
         'kopirovat': 'Copy', 'zkopirovano': 'Copied', 'kop_ico': 'Copy Business ID', 'kop_dic': 'Copy VAT ID',
         'kop_cislo': 'Copy account number', 'kop_iban': 'Copy IBAN',
         'h_kontakt': 'Contact', 'email': 'Email', 'telefon': 'Phone',
@@ -250,8 +250,8 @@ T = {
         'spravce': 'Zuständiges Finanzamt', 'spravce_hodnota': 'Finanzamt für die Region Südmähren', 'spravce_pozn': 'Dienststelle Brno III (Finanční úřad pro Jihomoravský kraj, Územní pracoviště Brno III)',
         'h_ucty': ('Bankkonten', 'Bankkonto'),
         'ucty_uvod': ('Vom Finanzamt im tschechischen Register der Umsatzsteuerpflichtigen veröffentlichte Konten.', 'Vom Finanzamt im tschechischen Register der Umsatzsteuerpflichtigen veröffentlichtes Konto.'),
-        'ucet': 'Konto', 'cislo': 'Kontonummer', 'banka': 'Bank', 'zverejneno': 'Veröffentlicht',
-        'zdroj': 'Laut tschechischem Register der Umsatzsteuerpflichtigen, Stand {d}. Den aktuellen Stand prüfen Sie im <a class="ext" href="{adis}" target="_blank" rel="noopener" hreflang="cs">ADIS-<span class="nowrap">Register{ext}</span></a>.',
+        'ucet': 'Konto', 'ucet_mena': '{m}-Konto', 'cislo': 'Kontonummer', 'banka': 'Bank', 'zverejneno': 'Veröffentlicht',
+        'zdroj': 'Den aktuellen Stand prüfen Sie im <a class="ext" href="{adis}" target="_blank" rel="noopener" hreflang="cs">ADIS-<span class="nowrap">Register{ext}</span></a>.',
         'kopirovat': 'Kopieren', 'zkopirovano': 'Kopiert', 'kop_ico': 'Ident.-Nr. kopieren', 'kop_dic': 'USt-IdNr. kopieren',
         'kop_cislo': 'Kontonummer kopieren', 'kop_iban': 'IBAN kopieren',
         'h_kontakt': 'Kontakt', 'email': 'E-Mail', 'telefon': 'Telefon',
@@ -378,8 +378,8 @@ def stranka(o, jazyk):
           </div>'''
 
     ucty = []
-    for i, (cislo, iban, banka, bic, zverejneno) in enumerate(o['ucty'], 1):
-        nadpis = f'{t["ucet"]} {i}' if pocet_uctu > 1 else t['ucet']
+    for i, (cislo, iban, banka, bic, zverejneno, mena) in enumerate(o['ucty'], 1):
+        nadpis = t['ucet_mena'].format(m=mena) if mena else (f'{t["ucet"]} {i}' if pocet_uctu > 1 else t['ucet'])
         ucty.append(f'''          <div class="card ucet">
             <h3>{nadpis}</h3>
             <dl>

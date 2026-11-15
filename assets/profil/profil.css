@@ -223,7 +223,7 @@ h2::before { content: ""; width: 6px; height: 1.1em; border-radius: 3px; backgro
 .stitky li { padding: .18rem .6rem; border-radius: 999px; background: var(--chip); color: var(--ink); font-size: .8rem; font-weight: 600; letter-spacing: .01em; }
 
 /* Bankovní účty */
-.ucty { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+.ucty { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 420px), 1fr)); gap: 20px; }
 .ucet { padding: 22px 26px; }
 .ucet h3 { margin: 0 0 .75rem; font-size: 1rem; font-weight: 700; }
 .ucet dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: .45rem 1rem; align-items: baseline; }
