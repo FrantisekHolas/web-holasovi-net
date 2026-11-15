@@ -160,6 +160,10 @@
         svatek = null;
       } else if (najdiMotiv(vynucenyMotiv)) {
         svatek = najdiMotiv(vynucenyMotiv);
+        // roční období podle začátku svátku (Velikonoce → jaro, Silvestr → zima), ne podle dneška
+        var rokNyni = casVPraze(cas).rok;
+        var zacatek = klicTerminu(String(svatek.od), rokNyni);
+        if (zacatek !== null) sezona = rocniObdobi(Date.UTC(rokNyni, Math.floor(zacatek / 100) - 1, zacatek % 100, 12));
       } else {
         console.warn('Motiv „' + vynucenyMotiv + '“ neexistuje.');
       }
