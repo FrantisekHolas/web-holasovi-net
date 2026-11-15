@@ -189,6 +189,7 @@ body {
   stroke-linejoin: round;
   paint-order: stroke;
   filter: url(#relief);
+  white-space: pre; /* mezery kolem písmene, viz strom.js */
 }
 button.listek {
   margin: 0;

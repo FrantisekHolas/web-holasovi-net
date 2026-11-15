@@ -42,7 +42,11 @@
     if (dx || dy) transformace.push('translate(' + dx + ' ' + dy + ')');
     if (natoceni) transformace.push('rotate(' + natoceni + ' 50 50)');
     if (transformace.length) text.setAttribute('transform', transformace.join(' '));
-    text.textContent = pismeno;
+    // Ozdobné patky písma přesahují šířku písmene (u L o 0,6 em vpravo). Safari kreslí zlatý
+    // přechod jen v šířce textu, proto jsou kolem písmene mezery (3 × 0,25 em), na obě strany
+    // stejně, aby písmeno zůstalo uprostřed.
+    text.setAttributeNS('http://www.w3.org/XML/1998/namespace', 'xml:space', 'preserve');
+    text.textContent = '   ' + pismeno + '   ';
     svg.appendChild(text);
     return svg;
   }
