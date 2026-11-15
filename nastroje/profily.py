@@ -65,11 +65,11 @@ CINNOST_FRANTISEK = {
         {
             'nadpis': ('Integrace', 'Integration', 'Integration'),
             'popis': (
-                'Propojení SAP s&nbsp;dalšími systémy a podpora mnoha datových formátů.',
-                'Connecting SAP with other systems and support for many data formats.',
-                'Anbindung von SAP an andere Systeme und Unterstützung vieler Datenformate.',
+                'Propojení SAP s&nbsp;dalšími systémy i&nbsp;veřejnými rejstříky (ADIS, ISIR, VIES) a podpora mnoha datových formátů.',
+                'Connecting SAP with other systems and Czech and EU public registers (ADIS, ISIR, VIES), support for many data formats.',
+                'Anbindung von SAP an andere Systeme und an tschechische und EU-Register (ADIS, ISIR, VIES), Unterstützung vieler Datenformate.',
             ),
-            'stitky': ['RFC', 'SAP Proxy', 'IDoc', 'REST', 'SOAP', 'OData', 'XML', 'JSON', 'EDI', 'XLS', 'XLSX'],
+            'stitky': ['RFC', 'SAP Proxy', 'IDoc', 'REST', 'SOAP', 'OData', 'ADIS', 'ISIR', 'VIES', 'XML', 'JSON', 'EDI', 'XLS', 'XLSX'],
         },
         {
             'nadpis': ('Integrační scénáře', 'Integration scenarios', 'Integrationsszenarien'),
