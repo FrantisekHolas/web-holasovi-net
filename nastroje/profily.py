@@ -42,7 +42,7 @@ CINNOST_FRANTISEK = {
                 'Procedural and object-oriented programming, HANA modelling, enhancements and modifications, dynpros, reports and custom complex solutions.',
                 'Prozedurale und objektorientierte Entwicklung, HANA-Modellierung, Erweiterungen und Modifikationen, Dynpros, Reports und eigene komplexe Lösungen.',
             ),
-            'stitky': ['ABAP OO', 'HANA DB', 'S/4HANA', 'BOPF', 'BRF+', 'ALV', 'SALV', 'BDC'],
+            'stitky': ['ABAP OO', 'HANA DB', 'S/4HANA', 'CDS', 'BOPF', 'BRF+', 'ALV', 'SALV', 'BDC'],
         },
         {
             'nadpis': ('Vývoj v&nbsp;SAP Fiori', 'SAP Fiori development', 'SAP-Fiori-Entwicklung'),
