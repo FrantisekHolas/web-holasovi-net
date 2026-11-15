@@ -45,6 +45,6 @@ window.HOLASOVI.motivy = {
   svatky: [
     { id: 'vanoce',     nazev: 'Vánoce',              od: 'Advent',         do: '30. 12.',       obrazky: ['ctverec', 'vyska', 'panorama'], noc: 'malba' },
     { id: 'silvestr',   nazev: 'Silvestr a Nový rok', od: '31. 12.',        do: '1. 1.',         obrazky: [], efekt: 'ohnostroj', noc: 'vzdy' },
-    { id: 'velikonoce', nazev: 'Velikonoce',          od: 'Velikonoce -3',  do: 'Velikonoce +1', obrazky: [] }
+    { id: 'velikonoce', nazev: 'Velikonoce',          od: 'Velikonoce -3',  do: 'Velikonoce +1', obrazky: ['ctverec', 'vyska', 'panorama'] }
   ]
 };

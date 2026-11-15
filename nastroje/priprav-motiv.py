@@ -99,11 +99,12 @@ def nacti(cesta, rozmer, predloha, format, polohy):
     print(f'  rozměr {im.width} × {im.height} převeden na {rozmer[0]} × {rozmer[1]} podle lístků: '
           f'zvětšení {m[0, 0]:.2f}×, výřez x {x0:.0f}–{x1:.0f}, y {y0:.0f}–{y1:.0f}')
     if x0 < -2 or y0 < -2 or x1 > im.width + 2 or y1 > im.height + 2:
-        print('  POZOR: výřez přesahuje malbu, okraj se doplní opakováním krajních pixelů')
+        print('  POZOR: výřez přesahuje malbu, okraj se doplní zrcadlením kraje malby')
     if m[0, 0] > 1.15:
         print('  POZOR: malba se zvětšuje, bude méně ostrá; ostřejší bude malba přímo v rozměru '
               f'{rozmer[0]} × {rozmer[1]}')
-    return Image.fromarray(cv2.warpAffine(np.asarray(im), m, rozmer, flags=cv2.INTER_LANCZOS4, borderMode=cv2.BORDER_REPLICATE))
+    # přesah se doplní zrcadlením (u oblohy nebo trávy vypadá přirozeně, opakování kraje dělá pruhy)
+    return Image.fromarray(cv2.warpAffine(np.asarray(im), m, rozmer, flags=cv2.INTER_LANCZOS4, borderMode=cv2.BORDER_REFLECT_101))
 
 
 def zmer_posuny(predloha, malba, format, polohy):
