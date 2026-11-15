@@ -185,6 +185,7 @@
       svatek: svatek ? svatek.id : null,
       efekt: motiv.efekt || null,
       noc: motiv.noc || null,
+      oslavenec: motiv.oslavenec || null,
       vlastniObrazky: !!(motiv.obrazky && motiv.obrazky.length),
       zdroje: zdroje
     };

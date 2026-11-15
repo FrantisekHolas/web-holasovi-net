@@ -57,8 +57,11 @@ Malba stromu se mění podle ročního období a svátků, podobně jako sváte�
 | Vánoce | od 1. adventní neděle do 30. 12. | ano (noční malba, v noci se už neztmavuje) |
 | Silvestr a Nový rok | 31. 12.–1. 1., s ohňostrojem | vlastní není, použije se zima v nočním režimu |
 | Velikonoce | Zelený čtvrtek – Velikonoční pondělí | ano (vajíčka, stužky a zajíci) |
+| Narozeniny Věrky | 9. 12. | ano (noční malba); Věrčino písmeno V září |
 
-Svátky mají přednost před ročním obdobím. Rozhoduje datum a čas v Česku. Dokud motiv nemá vlastní malbu, použije se malba ročního období a nakonec podzim.
+Svátky mají přednost před ročním obdobím. Když se termíny překrývají (narozeniny 9. 12. v Adventu), platí motiv, který je v `motivy.js` výš. Rozhoduje datum a čas v Česku. Dokud motiv nemá vlastní malbu, použije se malba ročního období a nakonec podzim.
+
+**Oslavenec:** motiv může mít `oslavenec: 'Věrka'` (jméno z `clenove.js`). Ten den je písmeno na lístku oslavence větší a svítí a kolem lístku pomalu dýchá zlatá záře. Při zapnutém omezení pohybu v systému záře nepulzuje. Vyzkoušení: `https://holasovi.net/?datum=2026-12-09`.
 
 Seznam motivů a jejich termíny jsou v [`assets/js/motivy.js`](assets/js/motivy.js). Nová malba se přidá takto:
 

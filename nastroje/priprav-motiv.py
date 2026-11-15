@@ -211,8 +211,9 @@ def main():
         posuny, listek = zmer_posuny(predloha, malba, format, polohy)
         m = srovnani(posuny, polohy, format, rozmer)
         if m is not None:
+            # okraj odkrytý posunem se doplní zrcadlením, opakování kraje dělá pruhy
             malba = Image.fromarray(cv2.warpAffine(np.asarray(malba), m, rozmer, flags=cv2.INTER_LANCZOS4,
-                                                   borderMode=cv2.BORDER_REPLICATE))
+                                                   borderMode=cv2.BORDER_REFLECT_101))
             posuny, listek = zmer_posuny(predloha, malba, format, polohy)
         for jmeno, (x, y, shoda) in posuny.items():
             odchylka = (x * x + y * y) ** 0.5 / listek

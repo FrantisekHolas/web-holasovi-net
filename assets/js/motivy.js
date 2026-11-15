@@ -9,6 +9,8 @@
   od Velikonoční neděle (např. 'Velikonoce -3' = Zelený čtvrtek) nebo 'Advent'
   (1. adventní neděle, případně s posunem ve dnech, např. 'Advent +7').
   Vánoce platí od 1. adventní neděle do 30. 12., pak přijde Silvestr.
+  Když na jeden den připadne víc svátků, platí ten, který je v seznamu dřív
+  (narozeniny proto stojí před Vánocemi).
 
   Malby motivu jsou ve složce assets/img/motivy/<id>/ a do pole "obrazky" se zapíše,
   které verze má (všechny ve stejném výřezu a rozměrech jako podzim):
@@ -18,6 +20,7 @@
   Chybějící verzi nahradí malba ročního období, a není-li ani ta, výchozí motiv.
 
   Efekt (pole "efekt") je skript assets/js/<efekt>.js, např. 'ohnostroj'.
+  Oslavenec (pole "oslavenec") je jméno člena z clenove.js, jehož lístek a písmeno ten den září.
 
   Den a noc: malba se večer podle výšky slunce nad místem "misto" postupně setmí
   (od chvíle, kdy je slunce 2° nad obzorem, do plné noci při 8° pod obzorem) a ráno zase rozjasní.
@@ -43,8 +46,9 @@ window.HOLASOVI.motivy = {
   },
 
   svatky: [
-    { id: 'vanoce',     nazev: 'Vánoce',              od: 'Advent',         do: '30. 12.',       obrazky: ['ctverec', 'vyska', 'panorama'], noc: 'malba' },
-    { id: 'silvestr',   nazev: 'Silvestr a Nový rok', od: '31. 12.',        do: '1. 1.',         obrazky: [], efekt: 'ohnostroj', noc: 'vzdy' },
-    { id: 'velikonoce', nazev: 'Velikonoce',          od: 'Velikonoce -3',  do: 'Velikonoce +1', obrazky: ['ctverec', 'vyska', 'panorama'] }
+    { id: 'narozeniny-vera', nazev: 'Narozeniny Věrky',    od: '9. 12.',        do: '9. 12.',        obrazky: ['ctverec', 'vyska', 'panorama'], noc: 'malba', oslavenec: 'Věrka' },
+    { id: 'vanoce',          nazev: 'Vánoce',              od: 'Advent',        do: '30. 12.',       obrazky: ['ctverec', 'vyska', 'panorama'], noc: 'malba' },
+    { id: 'silvestr',        nazev: 'Silvestr a Nový rok', od: '31. 12.',       do: '1. 1.',         obrazky: [], efekt: 'ohnostroj', noc: 'vzdy' },
+    { id: 'velikonoce',      nazev: 'Velikonoce',          od: 'Velikonoce -3', do: 'Velikonoce +1', obrazky: ['ctverec', 'vyska', 'panorama'] }
   ]
 };

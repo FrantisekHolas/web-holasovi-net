@@ -139,13 +139,16 @@
     if (zavrit) zavrit.addEventListener('click', function () { karta.close(); });
   }
 
+  // oslavenec motivu (např. narozeniny v motivy.js): jeho lístek a písmeno září
+  var oslavenec = data.motiv && data.motiv.oslavenec;
+
   data.clenove.forEach(function (clen) {
     var el = document.createElement('button');
     el.type = 'button';
-    el.className = 'listek';
+    el.className = clen.jmeno === oslavenec ? 'listek listek--oslavenec' : 'listek';
     el.setAttribute('aria-haspopup', 'dialog');
     el.setAttribute('aria-expanded', 'false');
-    el.setAttribute('aria-label', clen.jmeno + ' – zobrazit kontakt');
+    el.setAttribute('aria-label', clen.jmeno + (clen.jmeno === oslavenec ? ' (dnes slaví)' : '') + ' – zobrazit kontakt');
     nastavPolohu(el, clen.poloha);
     el.style.setProperty('--zare', clen.zare);
     el.appendChild(inicialaSvg(clen.inicial, clen.natoceni, clen.posunPismene));
