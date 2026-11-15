@@ -139,7 +139,7 @@
     if (zavrit) zavrit.addEventListener('click', function () { karta.close(); });
   }
 
-  // oslavenec motivu (např. narozeniny v motivy.js): jeho lístek a písmeno září
+  // oslavenec motivu (např. narozeniny v motivy.js): jeho písmeno je růžové (styl.css)
   var oslavenec = data.motiv && data.motiv.oslavenec;
 
   data.clenove.forEach(function (clen) {

@@ -219,24 +219,8 @@ button.listek[aria-expanded='true']::before { opacity: 1; }
 button.listek:hover svg,
 button.listek:focus-visible svg { transform: scale(1.12); }
 button.listek:focus-visible { outline: 3px solid #fff1c8; outline-offset: 2px; }
-/* oslavenec (pole "oslavenec" v motivy.js, např. narozeniny): kolem lístku pomalu dýchá zlatá záře
-   (střed zůstane volný, aby lístek neztratil barvu) a písmeno je větší a svítí */
-button.listek--oslavenec::before {
-  inset: -42%;
-  background: radial-gradient(closest-side, rgba(255, 214, 120, 0) 50%, rgba(255, 214, 120, 0.55) 68%, rgba(255, 190, 90, 0.2) 85%, rgba(255, 190, 90, 0) 100%);
-  opacity: 1;
-  animation: oslavenec-zare 2.6s ease-in-out infinite alternate;
-}
-button.listek--oslavenec svg {
-  transform: scale(1.18);
-  filter: drop-shadow(0 0 2px rgba(255, 252, 235, 1)) drop-shadow(0 0 8px rgba(255, 220, 130, 1)) drop-shadow(0 0 18px rgba(255, 190, 80, 0.85));
-}
-button.listek--oslavenec:hover svg,
-button.listek--oslavenec:focus-visible svg { transform: scale(1.3); }
-@keyframes oslavenec-zare {
-  from { opacity: 0.55; transform: scale(0.94); }
-  to { opacity: 1; transform: scale(1.06); }
-}
+/* oslavenec (pole "oslavenec" v motivy.js, např. narozeniny): růžové písmeno místo zlatého */
+button.listek--oslavenec text { fill: url(#pismo-oslavence); }
 .listek__jmeno {
   position: absolute;
   left: 50%;
@@ -426,5 +410,4 @@ button.listek:focus-visible .listek__jmeno { opacity: 1; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition: none !important; }
-  button.listek--oslavenec::before { animation: none; }
 }

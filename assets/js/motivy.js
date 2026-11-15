@@ -20,7 +20,7 @@
   Chybějící verzi nahradí malba ročního období, a není-li ani ta, výchozí motiv.
 
   Efekt (pole "efekt") je skript assets/js/<efekt>.js, např. 'ohnostroj'.
-  Oslavenec (pole "oslavenec") je jméno člena z clenove.js, jehož lístek a písmeno ten den září.
+  Oslavenec (pole "oslavenec") je jméno člena z clenove.js, jehož písmeno je ten den růžové.
 
   Den a noc: malba se večer podle výšky slunce nad místem "misto" postupně setmí
   (od chvíle, kdy je slunce 2° nad obzorem, do plné noci při 8° pod obzorem) a ráno zase rozjasní.
