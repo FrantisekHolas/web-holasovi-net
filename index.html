@@ -77,7 +77,9 @@
         <stop offset="0.45" stop-color="#ffe7a6"/>
         <stop offset="1" stop-color="#e2ad48"/>
       </linearGradient>
-      <filter id="relief" x="-30%" y="-30%" width="160%" height="160%">
+      <!-- oblast filtru v souřadnicích lístku (viewBox 0 0 100 100), ne podle obrysu písmene:
+           Safari počítá obrys bez ozdobných patek (např. u L) a efekt by je usekl -->
+      <filter id="relief" filterUnits="userSpaceOnUse" x="-50" y="-50" width="200" height="200">
         <feGaussianBlur in="SourceAlpha" stdDeviation="1" result="rozmazani"/>
         <feSpecularLighting in="rozmazani" surfaceScale="2.5" specularConstant="1" specularExponent="16" lighting-color="#fffbe8" result="lesk">
           <feDistantLight azimuth="225" elevation="40"/>

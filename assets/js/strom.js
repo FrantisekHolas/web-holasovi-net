@@ -24,18 +24,24 @@
 
   if (!platno) return;
 
-  // posun = vodorovný posun písmene v procentech šířky lístku (záporný doleva)
+  // posun = [vodorovně, svisle] v procentech šířky lístku (záporné doleva / nahoru),
+  // samotné číslo = jen vodorovně; posouvá se ve směru obrazovky, nezávisle na natočení
   function inicialaSvg(pismeno, natoceni, posun) {
     var svg = document.createElementNS(SVG, 'svg');
     svg.setAttribute('viewBox', '0 0 100 100');
     svg.setAttribute('aria-hidden', 'true');
     svg.setAttribute('focusable', 'false');
     var text = document.createElementNS(SVG, 'text');
-    text.setAttribute('x', String(50 + (Number(posun) || 0)));
+    text.setAttribute('x', '50');
     text.setAttribute('y', '52');
     text.setAttribute('text-anchor', 'middle');
     text.setAttribute('dominant-baseline', 'central');
-    if (natoceni) text.setAttribute('transform', 'rotate(' + natoceni + ' 50 50)');
+    var dx = Number(Array.isArray(posun) ? posun[0] : posun) || 0;
+    var dy = Array.isArray(posun) ? Number(posun[1]) || 0 : 0;
+    var transformace = [];
+    if (dx || dy) transformace.push('translate(' + dx + ' ' + dy + ')');
+    if (natoceni) transformace.push('rotate(' + natoceni + ' 50 50)');
+    if (transformace.length) text.setAttribute('transform', transformace.join(' '));
     text.textContent = pismeno;
     svg.appendChild(text);
     return svg;
