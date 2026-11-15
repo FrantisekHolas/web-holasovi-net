@@ -14,6 +14,7 @@ ikony každého profilu v jeho složce ikony/ (lístek člena ze stromu s inici�
 """
 import json
 import os
+import unicodedata
 
 KOREN = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 WEB = 'https://holasovi.net/'
@@ -27,7 +28,7 @@ MAPY = 'https://www.google.com/maps/search/?api=1&query=Slez%C3%A1kova%20999%2F2
 
 # ---------- Čím se zabývá (místo předmětu podnikání z rejstříku) ----------
 # Podle profilu na LinkedIn. Každá oblast: nadpis, popis (cs, en, de) a štítky s technologiemi
-# (štítek je text, nebo trojice (cs, en, de), když se v jazycích liší).
+# (štítek je text, nebo trojice (cs, en, de), když se v jazycích liší; 'abecedne': True je seřadí).
 CINNOST_FRANTISEK = {
     'nadpis': ('Čím se zabývám', 'What I do', 'Was ich mache'),
     'uvod': (
@@ -76,22 +77,23 @@ CINNOST_FRANTISEK = {
         {
             'nadpis': ('Integrační scénáře', 'Integration scenarios', 'Integrationsszenarien'),
             'popis': (
-                'Bohaté zkušenosti s&nbsp;různými scénáři: Jungheinrich VNA/LRK/PRK, Kardex VNA, národní standard pro elektronický systém spisové služby ESSL/ISSD, EET&nbsp;2.0, veřejné rejstříky ADIS/ISIR/VIES a mnoho dalších.',
-                'Strong experience with various integration scenarios: Jungheinrich VNA/LRK/PRK, Kardex VNA, the Czech national standard for electronic records management systems ESSL/ISSD, EET&nbsp;2.0 (Czech electronic sales records), Czech and EU public registers ADIS/ISIR/VIES and many others.',
-                'Umfangreiche Erfahrung mit verschiedenen Integrationsszenarien: Jungheinrich VNA/LRK/PRK, Kardex VNA, tschechischer nationaler Standard für elektronische Aktenverwaltungssysteme ESSL/ISSD, EET&nbsp;2.0 (tschechische elektronische Umsatzerfassung), tschechische und EU-Register ADIS/ISIR/VIES und viele weitere.',
+                'Bohaté zkušenosti s&nbsp;různými scénáři: Jungheinrich VNA/LRK/PRK, Kardex VNA a mnoho dalších.',
+                'Strong experience with various integration scenarios: Jungheinrich VNA/LRK/PRK, Kardex VNA and many others.',
+                'Umfangreiche Erfahrung mit verschiedenen Integrationsszenarien: Jungheinrich VNA/LRK/PRK, Kardex VNA und viele weitere.',
             ),
-            # abecedně (ve všech třech jazycích stejné pořadí)
-            'stitky': ['EET 2.0', 'ESSL/ISSD', 'Jungheinrich VNA/LRK/PRK', 'Kardex VNA',
-                       ('Veřejné rejstříky ADIS/ISIR/VIES', 'Public registers ADIS/ISIR/VIES', 'Öffentliche Register ADIS/ISIR/VIES')],
+            'stitky': ['Jungheinrich VNA/LRK/PRK', 'Kardex VNA'],
+            'abecedne': True,
         },
         {
             'nadpis': ('Komplexní aplikace', 'Complex applications', 'Komplexe Anwendungen'),
             'popis': (
-                'Návrh a realizace komplexních aplikací: workflow, vlastní řešení ukládání dat se SAP Fiori a mnoho dalšího.',
-                'Design and implementation of complex applications: workflows, custom storage solutions with SAP Fiori and many others.',
-                'Konzeption und Umsetzung komplexer Anwendungen: Workflows, eigene Speicherlösungen mit SAP Fiori und vieles mehr.',
+                'Návrh a realizace komplexních aplikací: workflow, národní standard pro elektronický systém spisové služby eSSL/ISSD, EET&nbsp;2.0, veřejné rejstříky ADIS/ISIR/VIES a mnoho dalšího.',
+                'Design and implementation of complex applications: workflows, the Czech national standard for electronic records management systems eSSL/ISSD, EET&nbsp;2.0 (Czech electronic sales records), Czech and EU public registers ADIS/ISIR/VIES and many others.',
+                'Konzeption und Umsetzung komplexer Anwendungen: Workflows, tschechischer nationaler Standard für elektronische Aktenverwaltungssysteme eSSL/ISSD, EET&nbsp;2.0 (tschechische elektronische Umsatzerfassung), tschechische und EU-Register ADIS/ISIR/VIES und vieles mehr.',
             ),
-            'stitky': ['Workflow', 'SAP Fiori'],
+            'stitky': ['Workflow', 'EET 2.0', ('Spisová služba', 'Records management', 'Aktenverwaltung'),
+                       ('Veřejné rejstříky ADIS/ISIR/VIES', 'Public registers ADIS/ISIR/VIES', 'Öffentliche Register ADIS/ISIR/VIES')],
+            'abecedne': True,
         },
     ],
 }
@@ -340,6 +342,14 @@ def stitek(st, ji):
     return st[ji] if isinstance(st, tuple) else st
 
 
+def stitky_oblasti(ob, ji):
+    """Štítky oblasti v daném jazyce; s 'abecedne': True seřazené abecedně (bez ohledu na diakritiku)."""
+    stitky = [stitek(st, ji) for st in ob['stitky']]
+    if ob.get('abecedne'):
+        stitky.sort(key=lambda x: unicodedata.normalize('NFD', x).encode('ascii', 'ignore').decode().casefold())
+    return stitky
+
+
 def rod(hodnota, osoba):
     """Text podle rodu: dvojice (muž, žena) nebo jeden společný text."""
     if isinstance(hodnota, tuple):
@@ -398,7 +408,7 @@ def stranka(o, jazyk):
             f'''          <div class="card oblast">
             <h3>{ob["nadpis"][ji]}</h3>
             <p>{ob["popis"][ji]}</p>
-            {('<ul class="stitky">' + "".join(f"<li>{stitek(st, ji)}</li>" for st in ob["stitky"]) + '</ul>') if ob["stitky"] else ''}
+            {('<ul class="stitky">' + "".join(f"<li>{st}</li>" for st in stitky_oblasti(ob, ji)) + '</ul>') if ob["stitky"] else ''}
           </div>''' for ob in cinnost['oblasti'])
         cinnost_html = f'''
     <section class="{tridy.pop(0)}" id="cinnost" aria-labelledby="cinnost-h">
