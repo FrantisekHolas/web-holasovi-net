@@ -76,9 +76,9 @@ CINNOST_FRANTISEK = {
         {
             'nadpis': ('Integrační scénáře', 'Integration scenarios', 'Integrationsszenarien'),
             'popis': (
-                'Bohaté zkušenosti s&nbsp;různými scénáři: Jungheinrich VNA/LRK/PRK, Kardex VNA, národní standard pro ESSL/ISSD, EET&nbsp;2.0, veřejné rejstříky (ADIS, ISIR, VIES) a mnoho dalších.',
-                'Strong experience with various integration scenarios: Jungheinrich VNA/LRK/PRK, Kardex VNA, the Czech national standard for ESSL/ISSD, EET&nbsp;2.0 (Czech electronic sales records), Czech and EU public registers (ADIS, ISIR, VIES) and many others.',
-                'Umfangreiche Erfahrung mit verschiedenen Integrationsszenarien: Jungheinrich VNA/LRK/PRK, Kardex VNA, tschechischer nationaler Standard für ESSL/ISSD, EET&nbsp;2.0 (tschechische elektronische Umsatzerfassung), tschechische und EU-Register (ADIS, ISIR, VIES) und viele weitere.',
+                'Bohaté zkušenosti s&nbsp;různými scénáři: Jungheinrich VNA/LRK/PRK, Kardex VNA, národní standard pro elektronický systém spisové služby ESSL/ISSD, EET&nbsp;2.0, veřejné rejstříky ADIS/ISIR/VIES a mnoho dalších.',
+                'Strong experience with various integration scenarios: Jungheinrich VNA/LRK/PRK, Kardex VNA, the Czech national standard for electronic records management systems ESSL/ISSD, EET&nbsp;2.0 (Czech electronic sales records), Czech and EU public registers ADIS/ISIR/VIES and many others.',
+                'Umfangreiche Erfahrung mit verschiedenen Integrationsszenarien: Jungheinrich VNA/LRK/PRK, Kardex VNA, tschechischer nationaler Standard für elektronische Aktenverwaltungssysteme ESSL/ISSD, EET&nbsp;2.0 (tschechische elektronische Umsatzerfassung), tschechische und EU-Register ADIS/ISIR/VIES und viele weitere.',
             ),
             # abecedně (ve všech třech jazycích stejné pořadí)
             'stitky': ['EET 2.0', 'ESSL/ISSD', 'Jungheinrich VNA/LRK/PRK', 'Kardex VNA',
