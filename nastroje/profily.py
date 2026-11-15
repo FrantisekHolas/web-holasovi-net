@@ -137,9 +137,9 @@ CINNOST_VERA = {
         {
             'nadpis': ('Vývoj v&nbsp;SAP ABAP', 'SAP ABAP development', 'SAP-ABAP-Entwicklung'),
             'popis': (
-                'Vývoj jednoduchých i&nbsp;složitějších řešení na míru.',
-                'Development of simple as well as more complex custom solutions.',
-                'Entwicklung einfacher wie auch komplexerer individueller Lösungen.',
+                'Podpora, analýzy a úpravy stávajících řešení, tvorba reportů a aplikací.',
+                'Support, analysis and modification of existing solutions, development of reports and applications.',
+                'Support, Analyse und Anpassung bestehender Lösungen, Erstellung von Reports und Anwendungen.',
             ),
             'stitky': [],
         },
