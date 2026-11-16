@@ -46,7 +46,7 @@ window.HOLASOVI.motivy = {
   },
 
   svatky: [
-    { id: 'narozeniny-radim', nazev: 'Narozeniny Radima',  od: '16. 11.',       do: '16. 11.',       obrazky: ['ctverec'], oslavenec: 'Radim' },
+    { id: 'narozeniny-radim', nazev: 'Narozeniny Radima',  od: '16. 11.',       do: '16. 11.',       obrazky: ['ctverec', 'panorama'], oslavenec: 'Radim' },
     { id: 'narozeniny-vera', nazev: 'Narozeniny Věrky',    od: '9. 12.',        do: '9. 12.',        obrazky: ['ctverec', 'vyska', 'panorama'], noc: 'malba', oslavenec: 'Věrka' },
     { id: 'vanoce',          nazev: 'Vánoce',              od: 'Advent',        do: '30. 12.',       obrazky: ['ctverec', 'vyska', 'panorama'], noc: 'malba' },
     { id: 'silvestr',        nazev: 'Silvestr a Nový rok', od: '31. 12.',       do: '1. 1.',         obrazky: [], efekt: 'ohnostroj', noc: 'vzdy' },
