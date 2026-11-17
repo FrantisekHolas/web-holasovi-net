@@ -46,10 +46,11 @@ window.HOLASOVI.motivy = {
   },
 
   svatky: [
-    { id: 'narozeniny-radim', nazev: 'Narozeniny Radima',  od: '16. 11.',       do: '16. 11.',       obrazky: ['ctverec', 'vyska', 'panorama'], oslavenec: 'Radim' },
-    { id: 'narozeniny-vera', nazev: 'Narozeniny Věrky',    od: '9. 12.',        do: '9. 12.',        obrazky: ['ctverec', 'vyska', 'panorama'], noc: 'malba', oslavenec: 'Věrka' },
-    { id: 'vanoce',          nazev: 'Vánoce',              od: 'Advent',        do: '30. 12.',       obrazky: ['ctverec', 'vyska', 'panorama'], noc: 'malba' },
-    { id: 'silvestr',        nazev: 'Silvestr a Nový rok', od: '31. 12.',       do: '1. 1.',         obrazky: [], efekt: 'ohnostroj', noc: 'vzdy' },
-    { id: 'velikonoce',      nazev: 'Velikonoce',          od: 'Velikonoce -3', do: 'Velikonoce +1', obrazky: ['ctverec', 'vyska', 'panorama'] }
+    { id: 'narozeniny-kristyna', nazev: 'Narozeniny Kristýny', od: '14. 8.',        do: '14. 8.',        obrazky: ['vyska'], oslavenec: 'Kristýna' },
+    { id: 'narozeniny-radim',    nazev: 'Narozeniny Radima',   od: '16. 11.',       do: '16. 11.',       obrazky: ['ctverec', 'vyska', 'panorama'], oslavenec: 'Radim' },
+    { id: 'narozeniny-vera',     nazev: 'Narozeniny Věrky',    od: '9. 12.',        do: '9. 12.',        obrazky: ['ctverec', 'vyska', 'panorama'], noc: 'malba', oslavenec: 'Věrka' },
+    { id: 'vanoce',              nazev: 'Vánoce',              od: 'Advent',        do: '30. 12.',       obrazky: ['ctverec', 'vyska', 'panorama'], noc: 'malba' },
+    { id: 'silvestr',            nazev: 'Silvestr a Nový rok', od: '31. 12.',       do: '1. 1.',         obrazky: [], efekt: 'ohnostroj', noc: 'vzdy' },
+    { id: 'velikonoce',          nazev: 'Velikonoce',          od: 'Velikonoce -3', do: 'Velikonoce +1', obrazky: ['ctverec', 'vyska', 'panorama'] }
   ]
 };
