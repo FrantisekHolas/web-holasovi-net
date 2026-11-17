@@ -57,7 +57,7 @@ Malba stromu se mění podle ročního období a svátků, podobně jako sváte�
 | Vánoce | od 1. adventní neděle do 30. 12. | ano (noční malba, v noci se už neztmavuje) |
 | Silvestr a Nový rok | 31. 12.–1. 1., s ohňostrojem | vlastní není, použije se zima v nočním režimu |
 | Velikonoce | Zelený čtvrtek – Velikonoční pondělí | ano (vajíčka, stužky a zajíci) |
-| Narozeniny Kristýny | 14. 8. | čtverec a na výšku (oslava s morčaty); Kristýnino písmeno K je růžové; panorama zatím léto |
+| Narozeniny Kristýny | 14. 8. | ano (oslava s morčaty; panorama složené ze čtverce a letního panoramatu); Kristýnino písmeno K je růžové |
 | Narozeniny Radima | 16. 11. | ano (oslava pod stromem); Radimovo písmeno R je růžové |
 | Narozeniny Věrky | 9. 12. | ano (noční malba); Věrčino písmeno V je růžové |
 
@@ -65,8 +65,9 @@ Malba stromu se mění podle ročního období a svátků, podobně jako sváte�
 
 | Motiv | Chybí | Poznámka |
 |---|---|---|
-| Narozeniny Kristýny (14. 8.) | panorama | girlanda s nápisem musí vést pod velkými lístky (osvědčilo se zadání z letního čtverce a varianty 9:16) |
 | Narozeniny Lukáše (2. 9.) | čtverec, výška, panorama | motiv zatím není; v dodaném čtverci Lukášova hlava zakrývá červený lístek (V) |
+
+**Panorama ze čtverce:** strom v panoramatu je strom ze čtverce zmenšený na výšku panoramatu (měřítko asi 0,371, čtverec vlevo na x ≈ 723 px). Když se panorama v Gemini nepovede, dá se složit: schválený čtverec zmenšený na 556 × 572 px doprostřed letního (nebo jiného) panoramatu s měkkým přechodem po stranách; lístky pak sedí do 1 %. Tak vzniklo panorama Narozenin Kristýny.
 
 Svátky mají přednost před ročním obdobím. Když se termíny překrývají (narozeniny 9. 12. v Adventu), platí motiv, který je v `motivy.js` výš. Rozhoduje datum a čas v Česku. Dokud motiv nemá vlastní malbu, použije se malba ročního období a nakonec podzim.
 
