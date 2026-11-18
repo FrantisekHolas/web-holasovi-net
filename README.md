@@ -57,6 +57,7 @@ Malba stromu se mění podle ročního období a svátků, podobně jako sváte�
 | Vánoce | od 1. adventní neděle do 30. 12. | ano (noční malba, v noci se už neztmavuje) |
 | Silvestr a Nový rok | 31. 12.–1. 1., s ohňostrojem | vlastní není, použije se zima v nočním režimu |
 | Velikonoce | Zelený čtvrtek – Velikonoční pondělí | ano (vajíčka, stužky a zajíci) |
+| Narozeniny Františka | 2. 6. | ano (programátor ABAP pod stromem z kabelů; panorama složené ze čtverce a letního panoramatu); Františkovo písmeno F je růžové |
 | Narozeniny Kristýny | 14. 8. | ano (oslava s morčaty; panorama složené ze čtverce a letního panoramatu); Kristýnino písmeno K je růžové |
 | Narozeniny Lukáše | 2. 9. | ano (rytíř se zajícem; panorama složené ze čtverce a letního panoramatu); Lukášovo písmeno L je růžové |
 | Narozeniny Radima | 16. 11. | ano (oslava pod stromem); Radimovo písmeno R je růžové |
@@ -69,7 +70,7 @@ Malba stromu se mění podle ročního období a svátků, podobně jako sváte�
 |---|---|---|
 | – | nic; všechny motivy mají všechny tři malby (Silvestr záměrně používá zimu) | |
 
-**Panorama ze čtverce:** strom v panoramatu je strom ze čtverce zmenšený na výšku panoramatu (měřítko asi 0,371 × 0,381, čtverec vlevo na x ≈ 723 px v rozměru 2000 × 557; ve velké verzi 3904 × 1088 čtverec 2048 px zmenšený na 1086 × 1117 na x ≈ 1411). Když se panorama v Gemini nepovede, dá se složit: schválený čtverec doprostřed panoramatu ročního období s měkkým přechodem po stranách; lístky pak sedí do 1 %. Tak vznikla panoramata Narozenin Kristýny a Lukáše (z léta) a Mikuláše (ze zimy).
+**Panorama ze čtverce:** strom v panoramatu je strom ze čtverce zmenšený na výšku panoramatu (měřítko asi 0,371 × 0,381, čtverec vlevo na x ≈ 723 px v rozměru 2000 × 557; ve velké verzi 3904 × 1088 čtverec 2048 px zmenšený na 1086 × 1117 na x ≈ 1411). Když se panorama v Gemini nepovede, dá se složit: schválený čtverec doprostřed panoramatu ročního období s měkkým přechodem po stranách; lístky pak sedí do 1 %. Tak vznikla panoramata Narozenin Františka, Kristýny a Lukáše (z léta) a Mikuláše (ze zimy).
 
 **Originály maleb** (z Gemini v plném rozlišení: čtverec 2048 × 2048, výška 1536 × 2752, panorama 3904 × 1088) jsou v soukromém repozitáři `FrantisekHolas/my-cloud`, složka `web-holasovi-net/`. Do tohoto veřejného repozitáře se nenahrávají. Přes chat se obrázky zmenšují, proto se malby zpracovávají z originálů. Ruční retuše (druhé slunce v letním panoramatu, čtvrtý sob na Vánocích a u Narozenin Věrky na výšku) se při novém zpracování přenášejí z dosavadní malby.
 
