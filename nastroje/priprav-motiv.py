@@ -4,7 +4,11 @@ Připraví malby nového motivu stromu pro web (viz assets/js/motivy.js).
 
 Malby z Gemini se porovnají s podzimní předlohou: u každého z pěti lístků se změří
 posun proti poloze v assets/js/clenove.js, malba se o průměrný posun srovná
-a uloží ve všech velikostech do assets/img/motivy/<motiv>/.
+a uloží ve všech velikostech do assets/img/motivy/<motiv>/: velká verze pro velké
+obrazovky (např. ctverec-2048.webp), základní (ctverec.webp) a malá (ctverec-900.webp).
+Všechny se počítají přímo z dodané malby jediným převzorkováním, proto je nejlepší
+dodat originál v plném rozlišení (Gemini: čtverec 2048 × 2048, výška 1536 × 2752,
+panorama 3904 × 1088).
 
 Použití (z kořene repozitáře):
   python3 nastroje/priprav-motiv.py jaro --ctverec ctverec.jpg --vyska vyska.jpg --panorama panorama.jpg
@@ -26,10 +30,10 @@ KOREN = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 MOTIVY = os.path.join(KOREN, 'assets', 'img', 'motivy')
 PREDLOHA = 'podzim'
 FORMATY = {
-    # rozměr, menší verze, velikost lístku jako podíl šířky malby
-    'ctverec': ((1500, 1500), 900, 0.12),
-    'vyska': ((1116, 2000), 720, 0.16),
-    'panorama': ((2000, 557), 1200, 0.04),
+    # rozměr, menší verze, velikost lístku jako podíl šířky malby, velká verze (pro velké obrazovky)
+    'ctverec': ((1500, 1500), 900, 0.12, (2048, 2048)),
+    'vyska': ((1116, 2000), 720, 0.16, (1536, 2752)),
+    'panorama': ((2000, 557), 1200, 0.04, (3904, 1088)),
 }
 KVALITA = 85
 MEZ_POSUNU = 0.04   # největší dovolený zbytkový posun lístku (podíl velikosti lístku)
@@ -48,11 +52,26 @@ def polohy_listku():
     return vysledek
 
 
+def prevod(im, m, rozmer):
+    """Převzorkování malby maticí m (2 × 3, px malby → px cíle); přesah se doplní zrcadlením
+    (u oblohy nebo trávy vypadá přirozeně, opakování kraje dělá pruhy)."""
+    return Image.fromarray(cv2.warpAffine(np.asarray(im), np.float32(m), rozmer, flags=cv2.INTER_LANCZOS4,
+                                          borderMode=cv2.BORDER_REFLECT_101))
+
+
+def slozit(m2, m1):
+    """Matice, která provede nejdřív m1 a pak m2."""
+    return (np.vstack([m2, (0, 0, 1)]) @ np.vstack([m1, (0, 0, 1)]))[:2]
+
+
 def nacti(cesta, rozmer, predloha, format, polohy):
+    """Načte malbu a vrátí (originál, matice px originálu → px malby v rozměru webu).
+    Srovnání s předlohou (posun, mírné měřítko) dopočítá main()."""
     im = Image.open(cesta).convert('RGB')
-    if im.size == rozmer:
-        return im
-    # Jiný rozměr nebo poměr stran (např. čtverec dodaný jako 3:2): lístky se najdou
+    if abs(im.width / im.height - rozmer[0] / rozmer[1]) < 0.01:
+        # stejný poměr stran (i originál ve vyšším rozlišení): jen změna měřítka
+        return im, np.float64([[rozmer[0] / im.width, 0, 0], [0, rozmer[1] / im.height, 0]])
+    # Jiný poměr stran (např. čtverec dodaný jako 3:2): lístky se najdou
     # v různých měřítkách a malba se zvětší a ořízne tak, aby seděly na předlohu.
     a = np.asarray(predloha, dtype=np.float32)
     b = np.asarray(im, dtype=np.float32)
@@ -86,25 +105,15 @@ def nacti(cesta, rozmer, predloha, format, polohy):
         A[2 * i + 1] = (q[1], 0, 1)
         y[2 * i + 1] = p[1]
     (k, tx, ty), *_ = np.linalg.lstsq(A, y, rcond=None)
-    m = np.float32([[k, 0, tx], [0, k, ty]])
-    # jemné doladění a jediné převzorkování z originálu
-    hruba = Image.fromarray(cv2.warpAffine(np.asarray(im), m, rozmer, flags=cv2.INTER_LANCZOS4, borderMode=cv2.BORDER_REPLICATE))
-    posuny, _ = zmer_posuny(predloha, hruba, format, polohy)
-    jemne = srovnani(posuny, polohy, format, rozmer, tise=True)
-    if jemne is not None:
-        m = (np.vstack([jemne, (0, 0, 1)]) @ np.vstack([m, (0, 0, 1)]))[:2].astype(np.float32)
+    m = np.float64([[k, 0, tx], [0, k, ty]])
     zpet = cv2.invertAffineTransform(m)
     x0, y0 = zpet @ (0, 0, 1)
     x1, y1 = zpet @ (rozmer[0], rozmer[1], 1)
     print(f'  rozměr {im.width} × {im.height} převeden na {rozmer[0]} × {rozmer[1]} podle lístků: '
-          f'zvětšení {m[0, 0]:.2f}×, výřez x {x0:.0f}–{x1:.0f}, y {y0:.0f}–{y1:.0f}')
+          f'měřítko {k:.2f}×, výřez x {x0:.0f}–{x1:.0f}, y {y0:.0f}–{y1:.0f}')
     if x0 < -2 or y0 < -2 or x1 > im.width + 2 or y1 > im.height + 2:
         print('  POZOR: výřez přesahuje malbu, okraj se doplní zrcadlením kraje malby')
-    if m[0, 0] > 1.15:
-        print('  POZOR: malba se zvětšuje, bude méně ostrá; ostřejší bude malba přímo v rozměru '
-              f'{rozmer[0]} × {rozmer[1]}')
-    # přesah se doplní zrcadlením (u oblohy nebo trávy vypadá přirozeně, opakování kraje dělá pruhy)
-    return Image.fromarray(cv2.warpAffine(np.asarray(im), m, rozmer, flags=cv2.INTER_LANCZOS4, borderMode=cv2.BORDER_REFLECT_101))
+    return im, m
 
 
 def zmer_posuny(predloha, malba, format, polohy):
@@ -191,10 +200,15 @@ def main():
         p.add_argument('--' + f, metavar='SOUBOR', help=f'malba ve formátu {f}')
     p.add_argument('--jen-kontrola', action='store_true', help='jen změřit, nic neukládat')
     p.add_argument('--kontrola', metavar='SLOŽKA', help='uložit sem obrázky s výřezy lístků pro kontrolu')
+    p.add_argument('--predloha', action='store_true',
+                   help=f'dovolí přegenerovat samotnou předlohu ({PREDLOHA}) z originálu; polohy lístků v clenove.js '
+                        'jsou změřené na ní, proto musí zůstat na místě (nástroj to ověří)')
     arg = p.parse_args()
 
-    if not re.fullmatch(r'[a-z0-9-]+', arg.motiv) or arg.motiv == PREDLOHA:
+    if not re.fullmatch(r'[a-z0-9-]+', arg.motiv):
         sys.exit('Neplatný název motivu.')
+    if arg.motiv == PREDLOHA and not arg.predloha:
+        sys.exit(f'{PREDLOHA} je předloha, podle které se srovnávají ostatní malby; přegenerovat ji jde jen s --predloha.')
     zadane = [f for f in FORMATY if getattr(arg, f)]
     if not zadane:
         sys.exit('Zadejte aspoň jednu malbu (--ctverec, --vyska, --panorama).')
@@ -203,24 +217,30 @@ def main():
     cil = os.path.join(MOTIVY, arg.motiv)
     chyba = False
     for format in zadane:
-        rozmer, male, _ = FORMATY[format]
+        rozmer, male, _, velky = FORMATY[format]
         print(f'{format}: {getattr(arg, format)}')
         predloha = Image.open(os.path.join(MOTIVY, PREDLOHA, format + '.webp')).convert('RGB')
-        malba = nacti(getattr(arg, format), rozmer, predloha, format, polohy)
-
+        im, m = nacti(getattr(arg, format), rozmer, predloha, format, polohy)
+        # srovnání s předlohou podle lístků (posun, případně mírné měřítko), vždy z originálu
+        posuny, listek = zmer_posuny(predloha, prevod(im, m, rozmer), format, polohy)
+        jemne = srovnani(posuny, polohy, format, rozmer)
+        if jemne is not None:
+            m = slozit(jemne, m)
+        malba = prevod(im, m, rozmer)
         posuny, listek = zmer_posuny(predloha, malba, format, polohy)
-        m = srovnani(posuny, polohy, format, rozmer)
-        if m is not None:
-            # okraj odkrytý posunem se doplní zrcadlením, opakování kraje dělá pruhy
-            malba = Image.fromarray(cv2.warpAffine(np.asarray(malba), m, rozmer, flags=cv2.INTER_LANCZOS4,
-                                                   borderMode=cv2.BORDER_REFLECT_101))
-            posuny, listek = zmer_posuny(predloha, malba, format, polohy)
         for jmeno, (x, y, shoda) in posuny.items():
             odchylka = (x * x + y * y) ** 0.5 / listek
             v_poradku = odchylka <= MEZ_POSUNU and shoda >= MEZ_SHODY
             chyba |= not v_poradku
             print(f'  {"OK   " if v_poradku else "POZOR"} {jmeno:10} posun {x:+5.1f} {y:+5.1f} px '
                   f'({odchylka * 100:.1f} % lístku), podobnost {shoda:.2f}')
+        # ostrost: kolik px originálu připadá na px velké verze
+        k = np.float64([[velky[0] / rozmer[0], 0, 0], [0, velky[1] / rozmer[1], 0]])
+        m_velka = slozit(k, m)
+        zvetseni = float(np.sqrt(abs(np.linalg.det(m_velka[:, :2]))))
+        if zvetseni > 1.15:
+            print(f'  POZOR: velká verze {velky[0]} × {velky[1]} se z malby {im.width} × {im.height} zvětšuje '
+                  f'{zvetseni:.2f}×, bude méně ostrá; nejlepší je originál z Gemini v plném rozlišení')
         if arg.kontrola:
             os.makedirs(arg.kontrola, exist_ok=True)
             kontrolni_obrazek(predloha, malba, format, polohy, os.path.join(arg.kontrola, f'{arg.motiv}-{format}.png'))
@@ -228,6 +248,7 @@ def main():
         if arg.jen_kontrola:
             continue
         os.makedirs(cil, exist_ok=True)
+        prevod(im, m_velka, velky).save(os.path.join(cil, f'{format}-{velky[0]}.webp'), quality=KVALITA, method=6)
         malba.save(os.path.join(cil, format + '.webp'), quality=KVALITA, method=6)
         mensi = (male, round(rozmer[1] * male / rozmer[0]))
         malba.resize(mensi, Image.LANCZOS).save(os.path.join(cil, f'{format}-{male}.webp'), quality=KVALITA, method=6)

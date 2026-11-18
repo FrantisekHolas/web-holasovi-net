@@ -14,9 +14,10 @@
 
   Malby motivu jsou ve složce assets/img/motivy/<id>/ a do pole "obrazky" se zapíše,
   které verze má (všechny ve stejném výřezu a rozměrech jako podzim):
-    'ctverec'  = ctverec.webp (1500 × 1500) + ctverec-900.webp + pozadi.webp
-    'vyska'    = vyska.webp (1116 × 2000) + vyska-720.webp
-    'panorama' = panorama.webp (2000 × 557) + panorama-1200.webp
+    'ctverec'  = ctverec.webp (1500 × 1500) + ctverec-900.webp + ctverec-2048.webp + pozadi.webp
+    'vyska'    = vyska.webp (1116 × 2000) + vyska-720.webp + vyska-1536.webp
+    'panorama' = panorama.webp (2000 × 557) + panorama-1200.webp + panorama-3904.webp
+  (velké verze 2048, 1536 a 3904 px dostanou jen velké obrazovky; připraví je nastroje/priprav-motiv.py)
   Chybějící verzi nahradí malba ročního období, a není-li ani ta, výchozí motiv.
 
   Efekt (pole "efekt") je skript assets/js/<efekt>.js, např. 'ohnostroj'.
@@ -49,6 +50,7 @@ window.HOLASOVI.motivy = {
     { id: 'narozeniny-kristyna', nazev: 'Narozeniny Kristýny', od: '14. 8.',        do: '14. 8.',        obrazky: ['ctverec', 'vyska', 'panorama'], oslavenec: 'Kristýna' },
     { id: 'narozeniny-lukas',    nazev: 'Narozeniny Lukáše',   od: '2. 9.',         do: '2. 9.',         obrazky: ['ctverec', 'vyska', 'panorama'], oslavenec: 'Lukáš' },
     { id: 'narozeniny-radim',    nazev: 'Narozeniny Radima',   od: '16. 11.',       do: '16. 11.',       obrazky: ['ctverec', 'vyska', 'panorama'], oslavenec: 'Radim' },
+    { id: 'mikulas',             nazev: 'Mikuláš',             od: '5. 12.',        do: '5. 12.',        obrazky: ['ctverec', 'panorama'] },
     { id: 'narozeniny-vera',     nazev: 'Narozeniny Věrky',    od: '9. 12.',        do: '9. 12.',        obrazky: ['ctverec', 'vyska', 'panorama'], noc: 'malba', oslavenec: 'Věrka' },
     { id: 'vanoce',              nazev: 'Vánoce',              od: 'Advent',        do: '30. 12.',       obrazky: ['ctverec', 'vyska', 'panorama'], noc: 'malba' },
     { id: 'silvestr',            nazev: 'Silvestr a Nový rok', od: '31. 12.',       do: '1. 1.',         obrazky: [], efekt: 'ohnostroj', noc: 'vzdy' },

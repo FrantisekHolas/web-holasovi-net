@@ -26,8 +26,12 @@
     <div class="scena__pozadi" aria-hidden="true"></div>
     <div class="platno" id="platno">
       <!-- Malbu podle ročního období nebo svátku doplní assets/js/obdobi.js (motivy v assets/js/motivy.js) -->
+      <!-- data-velka: zdroj i s velkou verzí malby jen pro velké obrazovky (tablet na výšku, monitor),
+           mobil stahuje dál základní velikost -->
       <picture id="obraz">
+        <source data-format="vyska" data-velka media="(max-aspect-ratio: 3/4) and (min-width: 700px)" type="image/webp" sizes="100vw">
         <source data-format="vyska" media="(max-aspect-ratio: 3/4)" type="image/webp" sizes="100vw">
+        <source data-format="panorama" data-velka media="(min-aspect-ratio: 21/10) and (min-width: 1200px)" type="image/webp" sizes="100vw">
         <source data-format="panorama" media="(min-aspect-ratio: 21/10)" type="image/webp" sizes="100vw">
         <img data-format="ctverec"
              sizes="(min-aspect-ratio: 1/1) 100vh, 100vw"

@@ -60,15 +60,18 @@ Malba stromu se mění podle ročního období a svátků, podobně jako sváte�
 | Narozeniny Kristýny | 14. 8. | ano (oslava s morčaty; panorama složené ze čtverce a letního panoramatu); Kristýnino písmeno K je růžové |
 | Narozeniny Lukáše | 2. 9. | ano (rytíř se zajícem; panorama složené ze čtverce a letního panoramatu); Lukášovo písmeno L je růžové |
 | Narozeniny Radima | 16. 11. | ano (oslava pod stromem); Radimovo písmeno R je růžové |
+| Mikuláš | 5. 12. | čtverec a panorama (děti jako Mikuláš, anděl a čert, morčata s nadílkou); na výšku zatím podzim |
 | Narozeniny Věrky | 9. 12. | ano (noční malba); Věrčino písmeno V je růžové |
 
 **Chybějící malby** (doplnit nástrojem `nastroje/priprav-motiv.py`, pak do `obrazky` v `motivy.js`):
 
 | Motiv | Chybí | Poznámka |
 |---|---|---|
-| – | nic; všechny motivy mají všechny tři malby (Silvestr záměrně používá zimu) | |
+| Mikuláš (5. 12.) | výška | v Gemini ze zimní výšky a schváleného čtverce; Silvestr záměrně používá zimu |
 
-**Panorama ze čtverce:** strom v panoramatu je strom ze čtverce zmenšený na výšku panoramatu (měřítko asi 0,371, čtverec vlevo na x ≈ 723 px). Když se panorama v Gemini nepovede, dá se složit: schválený čtverec zmenšený na 556 × 572 px doprostřed letního (nebo jiného) panoramatu s měkkým přechodem po stranách; lístky pak sedí do 1 %. Tak vzniklo panorama Narozenin Kristýny.
+**Panorama ze čtverce:** strom v panoramatu je strom ze čtverce zmenšený na výšku panoramatu (měřítko asi 0,371 × 0,381, čtverec vlevo na x ≈ 723 px v rozměru 2000 × 557; ve velké verzi 3904 × 1088 čtverec 2048 px zmenšený na 1086 × 1117 na x ≈ 1411). Když se panorama v Gemini nepovede, dá se složit: schválený čtverec doprostřed panoramatu ročního období s měkkým přechodem po stranách; lístky pak sedí do 1 %. Tak vznikla panoramata Narozenin Kristýny a Lukáše (z léta) a Mikuláše (ze zimy).
+
+**Originály maleb** (z Gemini v plném rozlišení: čtverec 2048 × 2048, výška 1536 × 2752, panorama 3904 × 1088) jsou v soukromém repozitáři `FrantisekHolas/my-cloud`, složka `web-holasovi-net/`. Do tohoto veřejného repozitáře se nenahrávají. Přes chat se obrázky zmenšují, proto se malby zpracovávají z originálů. Ruční retuše (druhé slunce v letním panoramatu, čtvrtý sob na Vánocích a u Narozenin Věrky na výšku) se při novém zpracování přenášejí z dosavadní malby.
 
 Svátky mají přednost před ročním obdobím. Když se termíny překrývají (narozeniny 9. 12. v Adventu), platí motiv, který je v `motivy.js` výš. Rozhoduje datum a čas v Česku. Dokud motiv nemá vlastní malbu, použije se malba ročního období a nakonec podzim.
 
@@ -77,7 +80,7 @@ Svátky mají přednost před ročním obdobím. Když se termíny překrývají
 Seznam motivů a jejich termíny jsou v [`assets/js/motivy.js`](assets/js/motivy.js). Nová malba se přidá takto:
 
 1. V Gemini se upraví stávající podzimní malba (čtverec, na výšku i panorama zvlášť), aby kompozice, kmen a pět velkých lístků zůstaly na místě.
-2. Nástroj [`nastroje/priprav-motiv.py`](nastroje/priprav-motiv.py) změří polohu lístků proti podzimní předloze, malby srovná a uloží do `assets/img/motivy/<motiv>/` ve všech velikostech (`ctverec.webp` 1500 × 1500, `ctverec-900.webp`, `pozadi.webp`, `vyska.webp` 1116 × 2000, `vyska-720.webp`, `panorama.webp` 2000 × 557, `panorama-1200.webp`). Malbu v jiném poměru stran (např. čtverec dodaný jako 3:2) převede podle lístků, jen bude méně ostrá. Když některý lístek nesedí, upozorní na to.
+2. Nástroj [`nastroje/priprav-motiv.py`](nastroje/priprav-motiv.py) změří polohu lístků proti podzimní předloze, malby srovná a uloží do `assets/img/motivy/<motiv>/` ve všech velikostech (`ctverec.webp` 1500 × 1500, `ctverec-900.webp`, `ctverec-2048.webp`, `pozadi.webp`, `vyska.webp` 1116 × 2000, `vyska-720.webp`, `vyska-1536.webp`, `panorama.webp` 2000 × 557, `panorama-1200.webp`, `panorama-3904.webp`). Všechny velikosti počítá z dodané malby jediným převzorkováním, proto je nejlepší originál v plném rozlišení. Malbu v jiném poměru stran (např. čtverec dodaný jako 3:2) převede podle lístků, jen bude méně ostrá. Když některý lístek nesedí nebo by se velká verze musela zvětšovat, upozorní na to.
    ```
    python3 nastroje/priprav-motiv.py zima --ctverec ctverec.jpg --vyska vyska.jpg --panorama panorama.jpg
    ```
@@ -104,6 +107,8 @@ Podle tvaru obrazovky se zobrazí jedna ze tří verzí malby:
 | mobil nebo tablet na výšku | `assets/img/motivy/<motiv>/vyska.webp` |
 | notebook, běžný monitor, tablet na šířku | `assets/img/motivy/<motiv>/ctverec.webp`, okolí vyplní rozmazané pozadí |
 | ultraširoký monitor (21:9, 32:9), mobil na šířku | `assets/img/motivy/<motiv>/panorama.webp` |
+
+Každá verze je ve třech velikostech a prohlížeč si vybere podle velikosti a jemnosti obrazovky. Velkou verzi (`ctverec-2048`, `vyska-1536`, `panorama-3904`) dostanou jen velké obrazovky: čtverec notebook s jemným displejem nebo velký monitor, výška tablet na výšku (od šířky 700 px), panorama monitor od šířky 1200 px. Mobil stahuje dál základní velikost.
 
 Polohy lístků pro každou verzi jsou v `assets/js/clenove.js` v procentech obrazu a platí pro všechny motivy. Při výměně celé malby je potřeba je přeměřit.
 

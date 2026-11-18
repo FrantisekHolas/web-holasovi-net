@@ -11,10 +11,12 @@
   var svatky = nastaveni.svatky || [];
   var VYCHOZI = nastaveni.vychozi || 'podzim';
   var ADRESAR = 'assets/img/motivy/';
+  // šířky souborů malby: <format>-<male>.webp, <format>.webp (velke) a <format>-<nejvetsi>.webp
+  // (velká verze z originálu pro velké obrazovky, viz nastroje/priprav-motiv.py)
   var FORMATY = {
-    ctverec:  { male: 900,  velke: 1500 },
-    vyska:    { male: 720,  velke: 1116 },
-    panorama: { male: 1200, velke: 2000 }
+    ctverec:  { male: 900,  velke: 1500, nejvetsi: 2048 },
+    vyska:    { male: 720,  velke: 1116, nejvetsi: 1536 },
+    panorama: { male: 1200, velke: 2000, nejvetsi: 3904 }
   };
   var ROCNI_OBDOBI = ['jaro', 'leto', 'podzim', 'zima'];
 
@@ -247,9 +249,11 @@
 
   function cesta(id, soubor) { return ADRESAR + id + '/' + soubor; }
 
-  function srcset(id, format) {
+  // velka = i velká verze (čtverec vždy; výška a panorama jen ve zdroji pro velké obrazovky, data-velka)
+  function srcset(id, format, velka) {
     var f = FORMATY[format];
-    return cesta(id, format + '-' + f.male + '.webp') + ' ' + f.male + 'w, ' + cesta(id, format + '.webp') + ' ' + f.velke + 'w';
+    return cesta(id, format + '-' + f.male + '.webp') + ' ' + f.male + 'w, ' + cesta(id, format + '.webp') + ' ' + f.velke + 'w' +
+      (velka ? ', ' + cesta(id, format + '-' + f.nejvetsi + '.webp') + ' ' + f.nejvetsi + 'w' : '');
   }
 
   var motiv;
@@ -272,11 +276,11 @@
     // nejdřív zdroje pro výšku a panorama, obrázek až nakonec (aby se nestahoval zbytečně čtverec)
     Array.prototype.forEach.call(obraz.querySelectorAll('source[data-format]'), function (zdroj) {
       var format = zdroj.getAttribute('data-format');
-      if (FORMATY[format]) zdroj.setAttribute('srcset', srcset(motiv.zdroje[format], format));
+      if (FORMATY[format]) zdroj.setAttribute('srcset', srcset(motiv.zdroje[format], format, zdroj.hasAttribute('data-velka')));
     });
     var img = obraz.querySelector('img');
     if (img) {
-      img.setAttribute('srcset', srcset(motiv.zdroje.ctverec, 'ctverec'));
+      img.setAttribute('srcset', srcset(motiv.zdroje.ctverec, 'ctverec', true));
       img.setAttribute('src', cesta(motiv.zdroje.ctverec, 'ctverec.webp'));
     }
   }
