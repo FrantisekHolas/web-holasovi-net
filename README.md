@@ -60,14 +60,14 @@ Malba stromu se mění podle ročního období a svátků, podobně jako sváte�
 | Narozeniny Kristýny | 14. 8. | ano (oslava s morčaty; panorama složené ze čtverce a letního panoramatu); Kristýnino písmeno K je růžové |
 | Narozeniny Lukáše | 2. 9. | ano (rytíř se zajícem; panorama složené ze čtverce a letního panoramatu); Lukášovo písmeno L je růžové |
 | Narozeniny Radima | 16. 11. | ano (oslava pod stromem); Radimovo písmeno R je růžové |
-| Mikuláš | 5. 12. | čtverec a panorama (děti jako Mikuláš, anděl a čert, morčata s nadílkou); na výšku zatím podzim |
+| Mikuláš | 5. 12. | ano (děti jako Mikuláš, anděl a čert, morčata s nadílkou; panorama složené ze čtverce a zimního panoramatu) |
 | Narozeniny Věrky | 9. 12. | ano (noční malba); Věrčino písmeno V je růžové |
 
 **Chybějící malby** (doplnit nástrojem `nastroje/priprav-motiv.py`, pak do `obrazky` v `motivy.js`):
 
 | Motiv | Chybí | Poznámka |
 |---|---|---|
-| Mikuláš (5. 12.) | výška | v Gemini ze zimní výšky a schváleného čtverce; Silvestr záměrně používá zimu |
+| – | nic; všechny motivy mají všechny tři malby (Silvestr záměrně používá zimu) | |
 
 **Panorama ze čtverce:** strom v panoramatu je strom ze čtverce zmenšený na výšku panoramatu (měřítko asi 0,371 × 0,381, čtverec vlevo na x ≈ 723 px v rozměru 2000 × 557; ve velké verzi 3904 × 1088 čtverec 2048 px zmenšený na 1086 × 1117 na x ≈ 1411). Když se panorama v Gemini nepovede, dá se složit: schválený čtverec doprostřed panoramatu ročního období s měkkým přechodem po stranách; lístky pak sedí do 1 %. Tak vznikla panoramata Narozenin Kristýny a Lukáše (z léta) a Mikuláše (ze zimy).
 
